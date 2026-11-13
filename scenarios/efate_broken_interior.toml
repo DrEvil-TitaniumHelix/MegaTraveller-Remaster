@@ -1,0 +1,50 @@
+
+[meta]
+format = 1.4
+name = "efate_broken_interior"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "M8A P20 launcher indoors"
+
+[place]
+world = 2
+area = 0
+level = 2
+cell = [7, 9]
+outdoors = false
+
+[party]
+members = [
+  { slot = 0, attr = { dex = 8 }, skills = { 10 = 2 } },
+]
+items = [
+  { slot = 0, hands = [{ id = 17, name = "4cm ram gl-10", qty = 2, charge = 3 }], pack = [{ id = 52, name = "electric torch", qty = 1, charge = 1, cell = 0 }] },
+]
+
+[npcs]
+hostility = "none"
+
+[squad]
+mode = "broken"
+selected = 0
+
+[[squad.travellers]]
+slot = 0
+cell = [7, 9]
+
+[[squad.travellers]]
+slot = 1
+cell = [7, 10]
+
+[[squad.travellers]]
+slot = 2
+cell = [7, 11]
+
+[[squad.travellers]]
+slot = 3
+cell = [8, 9]
+
+[[squad.travellers]]
+slot = 4
+cell = [8, 10]

@@ -1,0 +1,22 @@
+[meta]
+format = 1
+name = "Atom 162: Start the Neaera rescue clock"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T162"
+
+[place]
+world = 1
+area = 2
+level = 4
+cell = [2, 2]
+facing = 2
+outdoors = false
+
+[party]
+items = [{ slot = 0, hands = [{ id = 117, qty = 1 }] }]
+
+[npcs]
+hostility = "none"
+

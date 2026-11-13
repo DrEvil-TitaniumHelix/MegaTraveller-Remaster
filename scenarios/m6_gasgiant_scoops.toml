@@ -1,0 +1,41 @@
+[meta]
+menu = "Space / Gas giant, low fuel, scoops fitted"
+format = 1.2
+name = "Boughene gas giant approach, scoops fitted"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T085 Scoop fuel at a gas giant"
+notes = "Pending S runtime: this file is not yet an interactive space start."
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [33, 4]
+outdoors = true
+
+[npcs]
+hostility = "none"
+
+[time]
+date = 0
+
+[party]
+fuel = 2
+
+[ship]
+system = 1
+world = 255
+orbit = -1
+position = [146, 256]
+heading = 0
+velocity = [4, -4]
+thrust = 0
+jump_drive = 1
+fuel_scoops = true
+screen = "flight"
+
+[ship.damage]
+sections = [0, 0, 0, 0]
+hull = 0

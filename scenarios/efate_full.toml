@@ -1,0 +1,34 @@
+
+[meta]
+format = 1.4
+name = "efate_full"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "M8B P15 full pack"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [32, 9]
+outdoors = true
+
+[party]
+members = [
+  { slot = 0, attr = { dex = 8 }, skills = { 10 = 2 } },
+]
+items = [
+  { slot = 0, hands = [{ id = 14, name = "9mm adv. com. rifle", qty = 3, charge = 20 }], pack = [{ id = 4, name = "9mm auto pistol", qty = 1, charge = 15 }] },
+  { slot = 1, pack = [{ id = 52, name = "electric torch", qty = 1 }, { id = 53, name = "electric lantern", qty = 1 }, { id = 54, name = "spare oxygen tank", qty = 1 }, { id = 47, name = "fast drug", qty = 1 }, { id = 49, name = "combat drug", qty = 1 }, { id = 40, name = "respirator", qty = 1 }, { id = 41, name = "vacc helmet", qty = 1 }, { id = 28, name = "plastic knife", qty = 1 }, { id = 26, name = "dagger", qty = 1 }, { id = 3, name = "body pistol", qty = 1 }, { id = 0, name = "7mm revolver", qty = 1 }, { id = 58, name = "amythyst", qty = 1 }, { id = 61, name = "emeralds", qty = 1 }, { id = 45, name = "tl9 med kit", qty = 1 }, { id = 4, name = "9mm auto pistol", qty = 1 }, { id = 8, name = "7mm auto rifle", qty = 1 }, { id = 12, name = "9mm submachinegun", qty = 1 }, { id = 15, name = "light assault gun", qty = 1 }, { id = 51, name = "demolition charge", qty = 1 }] },
+]
+
+[npcs]
+hostility = "none"
+
+[[ground]]
+cell = [32, 9]
+id = 6
+name = "7mm carbine"
+qty = 1
+charge = 10

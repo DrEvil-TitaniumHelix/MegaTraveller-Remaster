@@ -1,0 +1,21 @@
+[meta]
+format = 1
+name = "Unseen starport: bank accounts"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T091 T092"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [33, 4]
+outdoors = true
+
+[party]
+credits = 30000
+members = [{ slot = 0, credits = 5000 }, { slot = 1, credits = 2000 }]
+
+[npcs]
+hostility = "none"

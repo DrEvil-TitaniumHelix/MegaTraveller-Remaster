@@ -1,0 +1,17 @@
+[meta]
+format = 1
+name = "Menorb Gems Bar"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T158"
+
+[place]
+world = 4
+area = 0
+level = 0
+cell = [5, 27]
+outdoors = true
+
+[npcs]
+hostility = "none"

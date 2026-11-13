@@ -1,0 +1,16 @@
+{
+  "$schema": "https://recomplauncher.com/schema/recomplauncher.json",
+  "format": 1,
+  "name": "MegaTraveller 1 Plus",
+  "repo": "DrEvil-TitaniumHelix/MegaTraveller-Remaster",
+  "game": {
+    "kind": "folder",
+    "label": "The folder of your own copy of MegaTraveller 1: The Zhodani Conspiracy (1990, DOS). It is the folder that holds TRAV.COM.",
+    "check": { "file": "TRAV.COM" }
+  },
+  "start": {
+    "program": ["megatraveller.exe"],
+    "args": ["--gamefiles", "{game}"]
+  },
+  "saves": ["saves", "look.toml"]
+}

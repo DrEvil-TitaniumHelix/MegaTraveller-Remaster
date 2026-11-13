@@ -1,0 +1,36 @@
+[meta]
+format = 1.4
+name = "Atom 169: Finish Kiefer and see the ending"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T169"
+
+[place]
+world = 2
+area = 0
+level = 2
+cell = [20, 8]
+outdoors = false
+
+[party]
+members = [{ slot = 0, attr = { dex = 15 }, skills = { 10 = 15 } }, { slot = 1, present = false }, { slot = 2, present = false }, { slot = 3, present = false }, { slot = 4, present = false }]
+items = [{ slot = 0, hands = [{ id = 14, qty = 3, charge = 20 }], pack = [{ id = 125, qty = 1 }, { id = 52, qty = 1, charge = 1 }] }]
+
+[npcs]
+hostility = "none"
+set = [{ record = 31, hostile = true }, { record = 9, present = false }, { record = 10, present = false }, { record = 26, present = false }, { record = 27, present = false }, { record = 28, present = false }, { record = 29, present = false }, { record = 30, present = false }]
+
+[squad]
+mode = "broken"
+selected = 0
+travellers = [{ slot = 0, cell = [20, 8] }]
+npc = [{ record = 31, hits = 1, engaged = true }]
+
+[squad.encounter]
+id = "zhodani_officer_boss"
+round = 1
+to_act = "party"
+
+[seeds]
+T = 102

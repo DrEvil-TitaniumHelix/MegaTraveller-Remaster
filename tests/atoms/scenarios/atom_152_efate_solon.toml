@@ -1,0 +1,17 @@
+[meta]
+format = 1
+name = "Efate Solon"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T152"
+
+[place]
+world = 2
+area = 4
+level = 0
+cell = [32, 2]
+outdoors = true
+
+[npcs]
+hostility = "none"

@@ -1,0 +1,21 @@
+[meta]
+format = 1
+name = "Atom 164: Find Arik at Streech"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T164"
+
+[place]
+world = 5
+area = 1
+level = 1
+cell = [14, 1]
+facing = 0
+outdoors = false
+
+[party]
+items = [{ slot = 0, hands = [{ id = 119, qty = 1 }], pack = [{ id = 89, qty = 1 }, { id = 52, qty = 1, charge = 1 }] }]
+
+[npcs]
+hostility = "none"

@@ -1,0 +1,24 @@
+[meta]
+menu = "Efate starport / Hospital door (Magellan wounded)"
+format = 1
+name = "Efate hospital"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "M8V-H9c hospital clicks"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [31, 28]
+outdoors = true
+
+[party]
+credits = 30000
+members = [
+  { slot = 0, hits = 5 },
+]
+
+[npcs]
+hostility = "none"

@@ -1,0 +1,82 @@
+
+[meta]
+menu = "Save and load / Saved game in an encounter"
+format = 1.4
+name = "m8c_save_encounter"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "M8C save-anywhere (mid-encounter)"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [22, 5]
+outdoors = true
+
+[party]
+members = [
+  { slot = 0, attr = { dex = 8 }, skills = { 10 = 2 }, hits = 12, hits_max = 21 },
+]
+items = [
+  { slot = 0, hands = [{ id = 14, name = "9mm adv. com. rifle", qty = 2, charge = 7 }], pack = [{ id = 4, name = "9mm auto pistol", qty = 1, charge = 15 }] },
+]
+
+[npcs]
+hostility = "none"
+set = [
+  { record = 14, hostile = true },
+  { record = 15, present = false },
+  { record = 16, hostile = true },
+]
+
+[[encounter]]
+id = "efate_quickstart_ambush"
+start = "scripted"
+trigger = { kind = "area_entry", rect = [[20, 1], [24, 12]] }
+end = "locked"
+boundary = "area"
+rect = [[17, 0], [27, 16]]
+participants = [14, 15, 16]
+auto_break = true
+allow_save = true
+surprise = "roll"
+attacker = "npcs"
+alerted_rounds = 10
+notes = "m8c_save_encounter: M8C save-anywhere; the game entry keeps allow_save = false until save-anywhere enables it"
+
+[squad]
+mode = "broken"
+selected = 1
+
+[squad.encounter]
+id = "efate_quickstart_ambush"
+round = 3
+to_act = "party"
+
+[[squad.travellers]]
+slot = 0
+cell = [22, 5]
+acted = true
+
+[[squad.travellers]]
+slot = 1
+cell = [22, 6]
+
+[[squad.travellers]]
+slot = 2
+cell = [23, 5]
+
+[[squad.travellers]]
+slot = 3
+cell = [23, 6]
+
+[[squad.travellers]]
+slot = 4
+cell = [22, 7]
+
+[[squad.npc]]
+record = 14
+hits = 2
+engaged = true

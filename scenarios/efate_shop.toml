@@ -1,0 +1,27 @@
+
+[meta]
+menu = "Efate ground / Neutral NPC to talk to"
+format = 1.4
+name = "efate_shop"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "M8A P2 / P11 / P16 neutral NPC"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [29, 28]
+outdoors = true
+
+[party]
+members = [
+  { slot = 0, attr = { dex = 8 }, skills = { 10 = 2 } },
+]
+items = [
+  { slot = 0, hands = [{ id = 8, name = "7mm auto rifle", qty = 2, charge = 20 }], pack = [{ id = 45, name = "tl9 med kit", qty = 1, cell = 0 }, { id = 61, name = "emeralds", qty = 1, cell = 4 }, { id = 4, name = "9mm auto pistol", qty = 1, charge = 15, cell = 6 }] },
+]
+
+[npcs]
+hostility = "none"

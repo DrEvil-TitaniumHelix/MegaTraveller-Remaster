@@ -1,0 +1,21 @@
+[meta]
+format = 1
+name = "Atom 166: Show the seal to the Yres clerk"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T166"
+
+[place]
+world = 7
+area = 0
+level = 0
+cell = [13, 22]
+facing = 0
+outdoors = true
+
+[party]
+items = [{ slot = 0, hands = [{ id = 90, qty = 1 }] }]
+
+[npcs]
+hostility = "none"

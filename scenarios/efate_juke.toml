@@ -1,0 +1,74 @@
+
+[meta]
+format = 1.4
+name = "efate_juke"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "M8A P1 / P21 anti-juke (O-3)"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [6, 28]
+outdoors = true
+
+[party]
+members = [
+  { slot = 0, attr = { dex = 8 }, skills = { 10 = 2 }, hits = 8, hits_max = 21 },
+]
+items = [
+  { slot = 0, hands = [{ id = 14, name = "9mm adv. com. rifle", qty = 3, charge = 20 }], pack = [{ id = 45, name = "tl9 med kit", qty = 1 }] },
+]
+
+[npcs]
+hostility = "none"
+set = [
+  { record = 14, hostile = true, cell = [6, 55] },
+  { record = 15, present = false },
+  { record = 16, present = false },
+]
+
+[[encounter]]
+id = "juke"
+start = "sight"
+end = "open"
+n_rounds = 1
+participants = [14]
+allow_save = false
+alerted_rounds = 10
+
+[squad]
+mode = "broken"
+selected = 0
+
+[squad.encounter]
+id = "juke"
+round = 2
+to_act = "party"
+
+[[squad.travellers]]
+slot = 0
+cell = [6, 28]
+
+[[squad.travellers]]
+slot = 1
+cell = [6, 27]
+
+[[squad.travellers]]
+slot = 2
+cell = [5, 28]
+
+[[squad.travellers]]
+slot = 3
+cell = [7, 28]
+
+[[squad.travellers]]
+slot = 4
+cell = [7, 27]
+
+[[squad.npc]]
+record = 14
+hits = 3
+engaged = true

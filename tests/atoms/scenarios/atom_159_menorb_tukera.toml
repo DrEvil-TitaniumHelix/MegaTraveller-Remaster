@@ -1,0 +1,17 @@
+[meta]
+format = 1
+name = "Beormn Tukera research station"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T159"
+
+[place]
+world = 4
+area = 1
+level = 0
+cell = [2, 14]
+outdoors = true
+
+[npcs]
+hostility = "none"

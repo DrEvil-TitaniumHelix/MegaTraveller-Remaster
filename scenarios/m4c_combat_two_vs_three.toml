@@ -1,0 +1,39 @@
+[meta]
+format = 1
+name = "Two vs three, Efate"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "M4C playtest start"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [32, 9]
+facing = 0
+outdoors = true
+
+[party]
+members = [
+  { slot = 0, hits = 21, hits_max = 21 },
+  { slot = 1, hits = 6, hits_max = 14 },
+  { slot = 2, present = false },
+  { slot = 3, present = false },
+  { slot = 4, present = false },
+]
+items = [
+  { slot = 0, hands = [ { id = 4, name = "9mm auto pistol", qty = 3, charge = 15 } ], armor = { id = 31, name = "flak jacket" } },
+  { slot = 1, hands = [ { id = 10, name = "18mm shotgun", qty = 2, charge = 10 } ], pack = [ { id = 45, name = "tl9 med kit", qty = 1 } ] },
+]
+
+[npcs]
+hostility = "none"
+set = [
+  { record = 14, cell = [29, 14], hostile = true, weapon = 12, ammo = 30, hits = 12 },
+  { record = 15, cell = [29, 17], hostile = true, weapon = 0, ammo = 6, hits = 8 },
+  { record = 16, cell = [30, 14], hostile = true, weapon = 26, ammo = 0, hits = 10 },
+]
+
+[seeds]
+T = 102

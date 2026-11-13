@@ -1,0 +1,33 @@
+
+[meta]
+menu = "Efate ground / Dark room"
+format = 1.4
+name = "efate_dark"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T084 A dark room is dim, never black"
+
+[place]
+world = 2
+area = 0
+level = 2
+cell = [7, 9]
+facing = 0
+outdoors = false
+dark = true
+
+[party]
+members = [
+  { slot = 0, attr = { dex = 8 }, skills = { 10 = 2 } },
+]
+items = [
+  { slot = 0, hands = [{ id = 51, name = "demolition charge", qty = 1 }], pack = [{ id = 52, name = "electric torch", qty = 1, charge = 0, cell = 0 }] },
+]
+
+[npcs]
+hostility = "none"
+
+[squad]
+mode = "grouped"
+selected = 0

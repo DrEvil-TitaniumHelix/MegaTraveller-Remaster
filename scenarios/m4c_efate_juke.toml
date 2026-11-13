@@ -1,0 +1,38 @@
+[meta]
+format = 1.1
+name = "Juke the encounter boundary (Efate road)"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "M4C P1 alerted state (D-O3)"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [34, 10]
+outdoors = true
+
+[npcs]
+hostility = "none"
+
+[[npc]]
+id = "thug"
+role = "thug"
+at = [34, 34]
+record = 17
+attitude = "hostile"
+weapon = 4
+facing = 6
+
+[[encounter]]
+id = "road_juke"
+start = "sight"
+end = "open"
+n_rounds = 1
+boundary = "radius"
+radius = 29
+auto_break = false
+allow_save = false
+participants = ["thug"]
+alerted_rounds = 10

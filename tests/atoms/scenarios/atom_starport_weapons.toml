@@ -1,0 +1,31 @@
+[meta]
+format = 1
+name = "Unseen starport: personal weapons"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T088 T089"
+
+[place]
+world = 2
+area = 0
+level = 4
+cell = [8, 7]
+outdoors = true
+
+[party]
+credits = 30000
+members = [{ slot = 0, credits = 5000 }]
+
+[[party.items]]
+slot = 0
+replace = true
+pack = [{ id = 26, name = "dagger", qty = 1 }]
+
+[npcs]
+hostility = "none"
+
+[starport]
+law = 0
+tech = 13
+offices = { weapons = true }

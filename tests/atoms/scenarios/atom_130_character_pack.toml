@@ -1,0 +1,29 @@
+[meta]
+format = 1
+name = "Character pack practice"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T130-T134"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [32, 9]
+outdoors = true
+
+[[party.items]]
+slot = 0
+pack = [
+  { id = 4, name = "9mm auto pistol", qty = 1, charge = 15 },
+  { id = 31, name = "flak jacket" },
+  { id = 45, name = "tl9 med kit", qty = 1 },
+]
+
+[[party.items]]
+slot = 1
+pack = []
+
+[npcs]
+hostility = "none"

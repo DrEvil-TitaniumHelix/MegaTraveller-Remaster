@@ -1,0 +1,21 @@
+[meta]
+format = 1
+name = "Atom 165: Show Arik the half seal"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T165"
+
+[place]
+world = 1
+area = 2
+level = 3
+cell = [3, 2]
+facing = 0
+outdoors = false
+
+[party]
+items = [{ slot = 0, hands = [{ id = 89, qty = 1 }] }]
+
+[npcs]
+hostility = "none"

@@ -1,0 +1,10 @@
+[meta]
+format = 1.3
+name = "After restore"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "M7 after restore"
+
+[save]
+file = "saves/m7_sample.mtsav"

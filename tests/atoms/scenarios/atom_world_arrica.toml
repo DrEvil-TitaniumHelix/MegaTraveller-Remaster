@@ -1,0 +1,18 @@
+[meta]
+format = 1
+name = "Unseen worlds: Enter the Arrica holding facility"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T147"
+
+[place]
+world = 6
+area = 1
+level = 0
+cell = [10, 26]
+outdoors = true
+
+[npcs]
+hostility = "none"
+set = [{ record = 1, hostile = false }, { record = 2, hostile = false }, { record = 3, hostile = false }, { record = 4, hostile = false }, { record = 5, hostile = false }, { record = 6, hostile = false }, { record = 7, hostile = false }, { record = 8, hostile = false }, { record = 9, hostile = false }, { record = 10, hostile = false }, { record = 11, hostile = false }, { record = 12, hostile = false }]

@@ -1,0 +1,17 @@
+[meta]
+format = 1
+name = "Unseen worlds: Walk into Boughene starport"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T140"
+
+[place]
+world = 1
+area = 0
+level = 0
+cell = [43, 14]
+outdoors = true
+
+[npcs]
+hostility = "none"

@@ -1,0 +1,22 @@
+[meta]
+format = 1
+name = "Kra mine entrance"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T150"
+
+[place]
+world = 2
+area = 1
+level = 0
+cell = [3, 6]
+outdoors = true
+
+[[party.items]]
+slot = 0
+replace = false
+pack = [{ id = 52, name = "electric torch", charge = 1 }]
+
+[npcs]
+hostility = "none"

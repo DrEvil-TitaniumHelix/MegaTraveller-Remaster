@@ -1,0 +1,22 @@
+[meta]
+menu = "Efate starport / Weapons store"
+format = 1
+name = "Weapons store, Efate level 4"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "M5 weapons store (KD8)"
+
+[place]
+world = 2
+area = 0
+level = 4
+cell = [8, 7]
+outdoors = true
+
+[party]
+credits = 30000
+members = [ { slot = 0, credits = 30000 } ]
+
+[npcs]
+hostility = "none"

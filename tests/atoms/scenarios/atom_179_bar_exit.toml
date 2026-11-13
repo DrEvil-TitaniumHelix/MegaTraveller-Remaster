@@ -1,0 +1,18 @@
+[meta]
+format = 1
+name = "Atom 179: leave the bar for Seara"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T179"
+
+[place]
+world = 2
+area = 0
+level = 3
+cell = [10, 15]
+facing = 2
+outdoors = false
+
+[npcs]
+hostility = "none"

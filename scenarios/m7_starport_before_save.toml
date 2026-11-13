@@ -1,0 +1,22 @@
+[meta]
+menu = "Save and load / Starport, before a save"
+format = 1
+name = "Starport before save"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "M7 save at the starport"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [33, 4]
+outdoors = true
+
+[party]
+credits = 30000
+cargo = [4, 4, 4, 4]
+
+[npcs]
+hostility = "none"

@@ -1,0 +1,44 @@
+[meta]
+format = 1.4
+name = "Atom 160: Defeat Viktor and take his passcard"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T160"
+
+[place]
+world = 1
+area = 0
+level = 0
+cell = [9, 70]
+outdoors = true
+
+[party]
+members = [{ slot = 0, attr = { dex = 15 }, skills = { 10 = 15 } }, { slot = 1, present = false }, { slot = 2, present = false }, { slot = 3, present = false }, { slot = 4, present = false }]
+items = [{ slot = 0, hands = [{ id = 14, qty = 3, charge = 20 }], pack = [{ id = 89, qty = 1 }] }]
+
+[npcs]
+hostility = "none"
+set = [{ record = 12, hostile = true }, { record = 13, present = false }, { record = 14, present = false }, { record = 15, present = false }, { record = 16, present = false }, { record = 17, present = false }]
+
+[[encounter]]
+id = "story_atom"
+start = "sight"
+end = "locked"
+participants = [12]
+allow_save = false
+surprise = "none"
+
+[squad]
+mode = "broken"
+selected = 0
+travellers = [{ slot = 0, cell = [9, 70] }]
+npc = [{ record = 12, hits = 1, engaged = true }]
+
+[squad.encounter]
+id = "story_atom"
+round = 1
+to_act = "party"
+
+[seeds]
+T = 102

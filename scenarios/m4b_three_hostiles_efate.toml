@@ -1,0 +1,23 @@
+[meta]
+menu = "Efate ground / Fight: three hostiles"
+format = 1
+name = "Three hostiles, Efate start"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "M4B combat"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [32, 9]
+outdoors = true
+
+[npcs]
+hostility = "as_map"
+set = [
+  { record = 14, cell = [29, 14], hostile = true },
+  { record = 15, cell = [29, 17], hostile = true },
+  { record = 16, cell = [30, 14], hostile = true },
+]

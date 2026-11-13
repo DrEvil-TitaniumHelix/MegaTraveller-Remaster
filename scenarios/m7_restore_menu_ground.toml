@@ -1,0 +1,17 @@
+[meta]
+format = 1
+name = "Restore from the Game menu"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "M7 restore (G menu)"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [32, 9]
+outdoors = true
+
+[npcs]
+hostility = "none"

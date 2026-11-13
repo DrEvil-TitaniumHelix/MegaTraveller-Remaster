@@ -1,0 +1,23 @@
+[meta]
+format = 1
+name = "Unseen worlds: Enter the Streech cave"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T144"
+
+[place]
+world = 5
+area = 1
+level = 0
+cell = [3, 2]
+outdoors = true
+
+[[party.items]]
+slot = 0
+replace = false
+pack = [{ id = 52, name = "electric torch", qty = 1, charge = 1 }]
+
+[npcs]
+hostility = "none"
+set = [{ record = 1, hostile = false }, { record = 2, hostile = false }, { record = 3, hostile = false }, { record = 4, hostile = false }, { record = 5, hostile = false }, { record = 6, hostile = false }, { record = 7, hostile = false }, { record = 8, hostile = false }, { record = 9, hostile = false }, { record = 10, hostile = false }, { record = 11, hostile = false }, { record = 12, hostile = false }, { record = 13, hostile = false }, { record = 14, hostile = false }, { record = 15, hostile = false }, { record = 16, hostile = false }, { record = 17, hostile = false }, { record = 18, hostile = false }]

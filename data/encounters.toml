@@ -1,0 +1,177 @@
+[meta]
+format = 1.1
+version = "1.0"
+
+[[encounter]]
+id = "efate_quickstart_ambush"
+where = { world = 2, area = 0, level = 0 }
+start = "scripted"
+trigger = { kind = "area_entry", rect = [[20, 1], [24, 12]] }
+end = "locked"
+boundary = "area"
+rect = [[17, 0], [27, 16]]
+participants = [14, 15, 16]
+auto_break = true
+allow_save = false
+surprise = "roll"
+attacker = "npcs"
+alerted_rounds = 10
+source = "ASBUILT 5 (lockstep reference session 01); D-O3b names it"
+
+
+[[encounter]]
+id = "louzy_warehouse"
+where = { world = 3, area = 0, level = 1 }
+start = "sight"
+end = "locked"
+participants = [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28]
+auto_break = true
+allow_save = false
+surprise = "roll"
+alerted_rounds = 10
+source = "Clue Book pr.29-30; W.DAT w3 a0 records 15-28 (drops 94, 110, 111, 112); SC-4"
+
+[[encounter]]
+id = "pocoon_package_ambush"
+where = { world = 1, area = 1, level = 0 }
+start = "sight"
+end = "locked"
+participants = [5, 6, 7, 8]
+auto_break = true
+allow_save = false
+surprise = "roll"
+alerted_rounds = 10
+source = "Clue Book pr.31; W.DAT w1 a1 records 5-8; SC-4"
+
+[[encounter]]
+id = "zhodani_officer_boss"
+where = { world = 2, area = 0, level = 2 }
+start = "sight"
+end = "locked"
+participants = [31]
+auto_break = true
+allow_save = false
+surprise = "roll"
+alerted_rounds = 10
+source = "W.DAT w2 a0 record 31 (id 321, tl12 pgmp); SC-4"
+
+
+[[encounter]]
+id = "assassin_amrhein_alazar"
+where = { world = 1, area = 0, level = 0 }
+start = "sight"
+end = "locked"
+participants = [28]
+auto_break = true
+allow_save = false
+surprise = "roll"
+alerted_rounds = 10
+source = "Boughene; W.DAT record 28 (light assault gun, drops its ID card); role assassin_amrhein_alazar; SC-4"
+
+[[encounter]]
+id = "assassin_katerenya_viridion"
+where = { world = 0, area = 3, level = 0 }
+start = "sight"
+end = "locked"
+participants = [17]
+auto_break = true
+allow_save = false
+surprise = "roll"
+alerted_rounds = 10
+source = "Alell (Iroth); W.DAT record 17 (4mm gauss rifle, drops its ID card); role assassin_katerenya_viridion; SC-4"
+
+[[encounter]]
+id = "assassin_gainus_ozar"
+where = { world = 1, area = 0, level = 0 }
+start = "sight"
+end = "locked"
+participants = [29]
+auto_break = true
+allow_save = false
+surprise = "roll"
+alerted_rounds = 10
+source = "Boughene; W.DAT record 29 (9mm submachinegun, drops its ID card); role assassin_gainus_ozar; SC-4"
+
+[[encounter]]
+id = "assassin_andolus_zelexian"
+where = { world = 3, area = 0, level = 2 }
+start = "sight"
+end = "locked"
+participants = [14]
+auto_break = true
+allow_save = false
+surprise = "roll"
+alerted_rounds = 10
+source = "Louzy, warehouse inner room (Clue Book pr.29: warehouse in the interior city); W.DAT record 14 (tl12 laser rifle, drops its ID card); role assassin_andolus_zelexian; SC-4"
+
+[[encounter]]
+id = "assassin_maximillian_mortis"
+where = { world = 5, area = 2, level = 0 }
+start = "sight"
+end = "locked"
+participants = [4]
+auto_break = true
+allow_save = false
+surprise = "roll"
+alerted_rounds = 10
+source = "Pixie (Streech); W.DAT record 4 (tl12 pgmp, drops its ID card); role assassin_maximillian_mortis; SC-4"
+
+[[encounter]]
+id = "assassin_szen_sanai"
+where = { world = 2, area = 0, level = 0 }
+start = "sight"
+end = "locked"
+participants = [32]
+auto_break = true
+allow_save = false
+surprise = "roll"
+alerted_rounds = 10
+source = "Efate; W.DAT record 32 (9mm adv. com. rifle, drops its ID card); role assassin_szen_sanai; SC-4"
+
+[[encounter]]
+id = "assassin_rhevah_hamache"
+where = { world = 2, area = 3, level = 3 }
+start = "sight"
+end = "locked"
+participants = [3]
+auto_break = true
+allow_save = false
+surprise = "roll"
+alerted_rounds = 10
+source = "Efate (Llun); W.DAT record 3 (4mm gauss rifle, drops its ID card); role assassin_rhevah_hamache; SC-4"
+
+[[encounter]]
+id = "assassin_bolo"
+where = { world = 7, area = 0, level = 0 }
+start = "sight"
+end = "locked"
+participants = [10]
+auto_break = true
+allow_save = false
+surprise = "roll"
+alerted_rounds = 10
+source = "Yres; W.DAT record 10 (4cm ram gl-10, drops its ID card); role assassin_bolo; SC-4"
+
+[[encounter]]
+id = "assassin_demetrieye_jannev"
+where = { world = 6, area = 1, level = 0 }
+start = "sight"
+end = "locked"
+participants = [2]
+auto_break = true
+allow_save = false
+surprise = "roll"
+alerted_rounds = 10
+source = "Uakye (Arrica); W.DAT record 2 (7mm assault rifle, drops its ID card); role assassin_demetrieye_jannev; SC-4"
+
+[[encounter]]
+id = "assassin_fallous_cepholon"
+where = { world = 5, area = 0, level = 4 }
+start = "sight"
+end = "locked"
+participants = [14]
+auto_break = true
+allow_save = false
+surprise = "roll"
+alerted_rounds = 10
+source = "Pixie; W.DAT record 14 (4mm gauss pistol, drops its ID card); role assassin_fallous_cepholon; SC-4"

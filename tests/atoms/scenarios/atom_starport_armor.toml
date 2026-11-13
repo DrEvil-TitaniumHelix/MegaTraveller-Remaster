@@ -1,0 +1,29 @@
+[meta]
+format = 1
+name = "Unseen starport: armor and vacc suit"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T090"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [23, 21]
+outdoors = true
+
+[party]
+credits = 30000
+
+[[party.items]]
+slot = 0
+replace = true
+pack = []
+
+[npcs]
+hostility = "none"
+
+[starport]
+tech = 13
+offices = { armor = true }

@@ -1,0 +1,39 @@
+[meta]
+menu = "Space / Landing at Louzy"
+format = 1.2
+name = "Louzy landing approach"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "M6 landing"
+notes = "Pending S runtime: this file is not yet an interactive space start."
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [33, 4]
+outdoors = true
+
+[npcs]
+hostility = "none"
+
+[time]
+date = 0
+
+[party]
+fuel = 62
+
+[ship]
+system = 3
+world = 0
+orbit = 5
+heading = 0
+velocity = [0, 0]
+thrust = 0
+jump_drive = 1
+screen = "flight"
+
+[ship.damage]
+sections = [0, 0, 0, 0]
+hull = 0

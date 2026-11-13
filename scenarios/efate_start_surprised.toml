@@ -1,0 +1,46 @@
+
+[meta]
+format = 1.4
+name = "efate_start_surprised"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "M8A P1 surprise"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [22, 5]
+outdoors = true
+
+[party]
+members = [
+  { slot = 0, attr = { dex = 8 }, skills = { 10 = 2 } },
+]
+items = [
+  { slot = 0, hands = [{ id = 14, name = "9mm adv. com. rifle", qty = 3, charge = 20 }], pack = [{ id = 4, name = "9mm auto pistol", qty = 1, charge = 15 }] },
+]
+
+[npcs]
+hostility = "none"
+set = [
+  { record = 14, hostile = true },
+  { record = 15, hostile = true },
+  { record = 16, hostile = true },
+]
+
+[[encounter]]
+id = "efate_quickstart_ambush"
+start = "scripted"
+trigger = { kind = "area_entry", rect = [[20, 1], [24, 12]] }
+end = "locked"
+boundary = "area"
+rect = [[17, 0], [27, 16]]
+participants = [14, 15, 16]
+auto_break = true
+allow_save = false
+surprise = "attackers"
+attacker = "npcs"
+alerted_rounds = 10
+notes = "efate_start_surprised: replaces the game entry of the same id for this run"

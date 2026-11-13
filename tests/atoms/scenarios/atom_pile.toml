@@ -1,0 +1,63 @@
+
+[meta]
+format = 1.4
+name = "atom_pile"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "M8B P16 ground tray"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [6, 20]
+outdoors = true
+
+[party]
+members = [
+  { slot = 0, attr = { dex = 8 }, skills = { 10 = 2 } },
+]
+items = [
+  { slot = 0, hands = [{ id = 14, name = "9mm adv. com. rifle", qty = 3, charge = 20 }], pack = [{ id = 4, name = "9mm auto pistol", qty = 1, charge = 15 }] },
+]
+
+[npcs]
+hostility = "none"
+
+[[ground]]
+cell = [6, 22]
+id = 0
+name = "7mm revolver"
+qty = 1
+charge = 6
+
+[[ground]]
+cell = [6, 22]
+id = 61
+name = "emeralds"
+qty = 1
+
+[squad]
+mode = "broken"
+selected = 0
+
+[[squad.travellers]]
+slot = 0
+cell = [6, 20]
+
+[[squad.travellers]]
+slot = 1
+cell = [7, 20]
+
+[[squad.travellers]]
+slot = 2
+cell = [5, 21]
+
+[[squad.travellers]]
+slot = 3
+cell = [7, 21]
+
+[[squad.travellers]]
+slot = 4
+cell = [5, 20]

@@ -1,0 +1,847 @@
+{
+  "start": "quickstart",
+  "start_tick": 1234,
+  "timeout_ms": 30000,
+  "steps": [
+    {
+      "pick": "continue",
+      "expect_kind": "ack",
+      "label": "1. Efate introduction, page 1"
+    },
+    {
+      "pick": "continue",
+      "expect_kind": "ack",
+      "label": "1. Efate introduction, page 2"
+    },
+    {
+      "pick": "continue",
+      "expect_kind": "ack",
+      "label": "1. Efate introduction, page 3"
+    },
+    {
+      "pick": "continue",
+      "expect_kind": "ack",
+      "label": "1. Efate introduction, page 4"
+    },
+    {
+      "pick": "continue",
+      "expect_kind": "ack",
+      "label": "1. Efate introduction, page 5",
+      "frame": true
+    },
+    {
+      "assert": {
+        "system": 2,
+        "alive_mask": 31,
+        "ship_name": "Interloper",
+        "conscious": {
+          "min": 1
+        },
+        "fuel": 125,
+        "in_space": false
+      },
+      "expect_kind": "combat.turn",
+      "label": "1. Efate quick-start ambush"
+    },
+    {
+      "snapshot": "S1",
+      "label": "2. Before the Efate ambush",
+      "frame": true
+    },
+    {
+      "pick": "menu:npc/14",
+      "expect_kind": "combat.turn",
+      "label": "3. open thug 14 actions to assign a standing target"
+    },
+    {
+      "pick": "menu:9",
+      "expect_kind": "combat.turn",
+      "expect_label": "Target",
+      "label": "3. Assign Magellan a standing target; Attack remains available"
+    },
+    {
+      "pick": "end_turn",
+      "expect_kind": "combat.turn",
+      "label": "3. End Turn fires Magellan's standing order at thug 14, then ends his turn"
+    },
+    {
+      "pick": "fire:npc/16",
+      "expect_kind": "combat.turn",
+      "label": "3. Efate ambush: fire at thug 16"
+    },
+    {
+      "pick": "end_turn",
+      "expect_kind": "combat.turn",
+      "label": "3. Carry out remaining standing orders, then end the turn; an already spent Attack does not fire twice"
+    },
+    {
+      "pick": "fire:npc/15",
+      "expect_kind": "combat.turn",
+      "label": "3. Efate ambush: fire at thug 15"
+    },
+    {
+      "pick": "end_turn",
+      "expect_kind": "combat.turn",
+      "label": "3. Carry out remaining standing orders, then end the turn; an already spent Attack does not fire twice"
+    },
+    {
+      "pick": "end_turn",
+      "expect_kind": "combat.turn",
+      "label": "3. Carry out remaining standing orders, then end the turn; an already spent Attack does not fire twice"
+    },
+    {
+      "pick": "fire:npc/15",
+      "expect_kind": "combat.turn"
+    },
+    {
+      "pick": "end_turn",
+      "expect_kind": "combat.turn",
+      "label": "3. Carry out remaining standing orders, then end the turn; an already spent Attack does not fire twice"
+    },
+    {
+      "pick": "fire:npc/14",
+      "expect_kind": "combat.turn"
+    },
+    {
+      "pick": "end_turn",
+      "expect_kind": "combat.turn",
+      "label": "3. Carry out remaining standing orders, then end the turn; an already spent Attack does not fire twice"
+    },
+    {
+      "assert": {
+        "encounter": null,
+        "alive_mask": {
+          "ne": 0
+        },
+        "conscious": {
+          "min": 1
+        },
+        "alerted": 0
+      },
+      "expect_kind": "ground",
+      "label": "3. Efate ambush ended; conscious party, no alerted NPCs",
+      "frame": true
+    },
+    {
+      "snapshot": "S2",
+      "expect_kind": "ground",
+      "label": "4. Efate after the ambush"
+    },
+    {
+      "pick": "move:east:5",
+      "expect_kind": "ground",
+      "after": {
+        "kind": "ground",
+        "state": {
+          "cell": {
+            "changed": true
+          },
+          "conscious": {
+            "min": 1
+          },
+          "alerted": 0
+        }
+      }
+    },
+    {
+      "pick": "move:east:5",
+      "expect_kind": "ground",
+      "after": {
+        "kind": "ground",
+        "state": {
+          "cell": {
+            "changed": true
+          },
+          "conscious": {
+            "min": 1
+          },
+          "alerted": 0
+        }
+      }
+    },
+    {
+      "pick": "move:east:5",
+      "expect_kind": "ground",
+      "after": {
+        "kind": "ground",
+        "state": {
+          "cell": {
+            "changed": true
+          },
+          "conscious": {
+            "min": 1
+          },
+          "alerted": 0
+        }
+      }
+    },
+    {
+      "restore": "S2",
+      "label": "4. Return to Efate after the ambush",
+      "frame": true
+    },
+    {
+      "assert": {
+        "encounter": null,
+        "alive_mask": {
+          "ne": 0
+        },
+        "conscious": {
+          "min": 1
+        },
+        "alerted": 0,
+        "in_space": false
+      },
+      "expect_kind": "ground"
+    },
+    {
+      "pick": "move:south:5",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (1/54)"
+    },
+    {
+      "pick": "move:east:5",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (2/54)"
+    },
+    {
+      "pick": "move:east:60",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (3/54)"
+    },
+    {
+      "pick": "move:south:10",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (4/54)"
+    },
+    {
+      "pick": "move:east:50",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (5/54)"
+    },
+    {
+      "pick": "move:north:20",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (6/54)"
+    },
+    {
+      "pick": "move:north:40",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (7/54)"
+    },
+    {
+      "pick": "move:west:30",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (8/54)"
+    },
+    {
+      "pick": "move:east:40",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (9/54)"
+    },
+    {
+      "pick": "move:southeast:5",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (10/54)"
+    },
+    {
+      "pick": "move:east:40",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (11/54)"
+    },
+    {
+      "pick": "move:east:5",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (12/54)"
+    },
+    {
+      "pick": "move:east:5",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (13/54)"
+    },
+    {
+      "pick": "move:east:5",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (14/54)"
+    },
+    {
+      "pick": "move:east:5",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (15/54)"
+    },
+    {
+      "pick": "move:east:5",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (16/54)"
+    },
+    {
+      "pick": "move:south:5",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (17/54)"
+    },
+    {
+      "pick": "move:south:5",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (18/54)"
+    },
+    {
+      "pick": "move:south:5",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (19/54)"
+    },
+    {
+      "pick": "move:south:5",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (20/54)"
+    },
+    {
+      "pick": "move:south:5",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (21/54)"
+    },
+    {
+      "pick": "move:south:5",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (22/54)"
+    },
+    {
+      "pick": "move:south:5",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (23/54)"
+    },
+    {
+      "pick": "move:south:5",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (24/54)"
+    },
+    {
+      "pick": "move:south:5",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (25/54)"
+    },
+    {
+      "pick": "move:south:5",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (26/54)"
+    },
+    {
+      "pick": "move:south:5",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (27/54)"
+    },
+    {
+      "pick": "move:northeast:40",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (28/54)"
+    },
+    {
+      "pick": "move:east:5",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (29/54)"
+    },
+    {
+      "pick": "move:northeast:5",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (30/54)"
+    },
+    {
+      "pick": "move:east:5",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (31/54)"
+    },
+    {
+      "pick": "move:east:5",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (32/54)"
+    },
+    {
+      "pick": "move:east:5",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (33/54)"
+    },
+    {
+      "pick": "move:southwest:1",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (34/54)"
+    },
+    {
+      "pick": "move:southwest:1",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (35/54)"
+    },
+    {
+      "pick": "move:south:1",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (36/54)"
+    },
+    {
+      "pick": "move:south:1",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (37/54)"
+    },
+    {
+      "pick": "move:south:1",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (38/54)"
+    },
+    {
+      "pick": "move:south:1",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (39/54)"
+    },
+    {
+      "pick": "move:south:1",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (40/54)"
+    },
+    {
+      "pick": "move:south:1",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (41/54)"
+    },
+    {
+      "pick": "move:south:1",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (42/54)"
+    },
+    {
+      "pick": "move:south:1",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (43/54)"
+    },
+    {
+      "pick": "move:south:1",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (44/54)"
+    },
+    {
+      "pick": "move:south:1",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (45/54)"
+    },
+    {
+      "pick": "move:south:1",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (46/54)"
+    },
+    {
+      "pick": "move:south:1",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (47/54)"
+    },
+    {
+      "pick": "move:south:1",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (48/54)"
+    },
+    {
+      "pick": "move:southwest:5",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (49/54)"
+    },
+    {
+      "pick": "move:west:40",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (50/54)"
+    },
+    {
+      "pick": "move:west:40",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (51/54)"
+    },
+    {
+      "pick": "move:west:100",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (52/54)"
+    },
+    {
+      "pick": "move:north:5",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (53/54)"
+    },
+    {
+      "pick": "move:west:10",
+      "expect_kind": "ground",
+      "label": "5. Walk from the ambush to the starport (54/54)"
+    },
+    {
+      "assert": {
+        "system": 2,
+        "cell": [
+          33,
+          3
+        ],
+        "panel": "t:13FF2"
+      },
+      "expect_kind": "menu",
+      "label": "5. Enter Efate starport at row 33, column 3",
+      "frame": true
+    },
+    {
+      "pick": "cmd:bank",
+      "expect_kind": "menu",
+      "label": "5. Open the starport bank"
+    },
+    {
+      "assert": {
+        "panel": "t:11571"
+      },
+      "expect_kind": "list",
+      "label": "5. Bank transaction screen"
+    },
+    {
+      "pick": "exit",
+      "expect_kind": "list",
+      "label": "5. Leave the bank"
+    },
+    {
+      "pick": "back",
+      "expect_kind": "menu",
+      "label": "5. Leave the starport"
+    },
+    {
+      "assert": {
+        "system": 2,
+        "in_space": false,
+        "conscious": {
+          "min": 1
+        },
+        "alerted": 0
+      },
+      "expect_kind": "ground",
+      "label": "5. Back outside the starport"
+    },
+    {
+      "pick": "move:southeast:5",
+      "expect_kind": "ground",
+      "label": "6. Walk to the Interloper launch pad"
+    },
+    {
+      "pick": "move:east:15",
+      "expect_kind": "ground",
+      "label": "6. Walk to the Interloper launch pad"
+    },
+    {
+      "pick": "move:northeast:5",
+      "expect_kind": "ground",
+      "label": "6. Walk to the Interloper launch pad"
+    },
+    {
+      "pick": "move:north:10",
+      "expect_kind": "ground",
+      "label": "6. Walk to the Interloper launch pad"
+    },
+    {
+      "pick": "cmd:launch",
+      "expect_kind": "space",
+      "label": "6. Take off from Efate"
+    },
+    {
+      "assert": {
+        "system": 2,
+        "in_space": true
+      },
+      "expect_kind": "space",
+      "label": "6. Interloper in space",
+      "frame": true
+    },
+    {
+      "pick": "cmd:stations",
+      "expect_kind": "space",
+      "label": "7. Open crew stations"
+    },
+    {
+      "pick": "cmd:stations",
+      "expect_kind": "menu",
+      "label": "7. Choose a station"
+    },
+    {
+      "pick": "menu:1c1c/3",
+      "expect_kind": "menu",
+      "label": "7. Computer station"
+    },
+    {
+      "pick": "cmd:load",
+      "expect_kind": "menu",
+      "label": "7. Load Jump-2"
+    },
+    {
+      "pick": "menu:d7b4/0",
+      "expect_kind": "menu",
+      "label": "7. Select Jump-2"
+    },
+    {
+      "pick": "menu:d7b4/0",
+      "expect_kind": "menu",
+      "label": "7. Load Jump-2 into the first two slots"
+    },
+    {
+      "pick": "back",
+      "expect_kind": "menu",
+      "label": "7. Flight/computer control: back"
+    },
+    {
+      "pick": "cmd:stop",
+      "expect_kind": "space",
+      "label": "7. Flight/computer control: cmd:stop"
+    },
+    {
+      "pick": "cmd:thrust",
+      "expect_kind": "space",
+      "label": "7. Flight/computer control: cmd:thrust"
+    },
+    {
+      "pick": "cmd:reverse",
+      "expect_kind": "space",
+      "label": "7. Flight/computer control: cmd:reverse"
+    },
+    {
+      "pick": "wait:120",
+      "expect_kind": "space",
+      "label": "7. Wait for computer loading"
+    },
+    {
+      "pick": "cmd:stations",
+      "expect_kind": "space",
+      "label": "7. Flight/computer control: cmd:stations"
+    },
+    {
+      "pick": "back",
+      "expect_kind": "menu",
+      "label": "7. Flight/computer control: back"
+    },
+    {
+      "pick": "cmd:launch",
+      "expect_kind": "space",
+      "label": "7. Take off after touching the nearby object"
+    },
+    {
+      "pick": "cmd:reverse",
+      "expect_kind": "space",
+      "label": "7. Flight/computer control: cmd:reverse"
+    },
+    {
+      "pick": "cmd:reverse",
+      "expect_kind": "space",
+      "label": "7. Flight/computer control: cmd:reverse"
+    },
+    {
+      "pick": "wait:150",
+      "expect_kind": "space",
+      "label": "7. Wait for computer loading"
+    },
+    {
+      "pick": "cmd:stations",
+      "expect_kind": "space",
+      "label": "7. Flight/computer control: cmd:stations"
+    },
+    {
+      "pick": "back",
+      "expect_kind": "menu",
+      "label": "7. Flight/computer control: back"
+    },
+    {
+      "pick": "cmd:thrust",
+      "expect_kind": "space",
+      "label": "7. Flight/computer control: cmd:thrust"
+    },
+    {
+      "pick": "cmd:thrust",
+      "expect_kind": "space",
+      "label": "7. Flight/computer control: cmd:thrust"
+    },
+    {
+      "pick": "cmd:reverse",
+      "expect_kind": "space",
+      "label": "7. Flight/computer control: cmd:reverse"
+    },
+    {
+      "pick": "cmd:reverse",
+      "expect_kind": "space",
+      "label": "7. Flight/computer control: cmd:reverse"
+    },
+    {
+      "pick": "wait:150",
+      "expect_kind": "space",
+      "label": "7. Wait for computer loading"
+    },
+    {
+      "pick": "cmd:stations",
+      "expect_kind": "space",
+      "label": "7. Flight/computer control: cmd:stations"
+    },
+    {
+      "pick": "cmd:run",
+      "expect_kind": "menu",
+      "label": "7. Flight/computer control: cmd:run"
+    },
+    {
+      "pick": "back",
+      "expect_kind": "menu",
+      "label": "7. Flight/computer control: back"
+    },
+    {
+      "pick": "wait:300",
+      "expect_kind": "space",
+      "label": "7. Wait for computer loading"
+    },
+    {
+      "pick": "wait:300",
+      "expect_kind": "space",
+      "label": "7. Wait for computer loading"
+    },
+    {
+      "pick": "wait:300",
+      "expect_kind": "space",
+      "label": "7. Wait for computer loading"
+    },
+    {
+      "pick": "wait:300",
+      "expect_kind": "space",
+      "label": "7. Wait for computer loading"
+    },
+    {
+      "pick": "wait:300",
+      "expect_kind": "space",
+      "label": "7. Wait for computer loading"
+    },
+    {
+      "pick": "cmd:stations",
+      "expect_kind": "space",
+      "label": "7. Flight/computer control: cmd:stations"
+    },
+    {
+      "pick": "cmd:run",
+      "expect_kind": "menu",
+      "label": "7. Run a loaded program"
+    },
+    {
+      "pick": "menu:d7b4/0",
+      "expect_kind": "menu",
+      "label": "7. Run Jump-2"
+    },
+    {
+      "pick": "cmd:load",
+      "expect_kind": "menu",
+      "label": "7. Load Navigation"
+    },
+    {
+      "pick": "menu:d7b4/0",
+      "expect_kind": "menu",
+      "label": "7. Select Navigation"
+    },
+    {
+      "pick": "menu:d7b4/1",
+      "expect_kind": "menu",
+      "label": "7. Load Navigation beside Jump-2"
+    },
+    {
+      "pick": "back",
+      "expect_kind": "menu",
+      "label": "7. Flight/computer control: back"
+    },
+    {
+      "pick": "wait:300",
+      "expect_kind": "space",
+      "label": "7. Wait for computer loading"
+    },
+    {
+      "pick": "wait:300",
+      "expect_kind": "space",
+      "label": "7. Wait for computer loading"
+    },
+    {
+      "pick": "wait:300",
+      "expect_kind": "space",
+      "label": "7. Wait for computer loading"
+    },
+    {
+      "pick": "wait:300",
+      "expect_kind": "space",
+      "label": "7. Wait for computer loading"
+    },
+    {
+      "pick": "wait:300",
+      "expect_kind": "space",
+      "label": "7. Wait for computer loading"
+    },
+    {
+      "pick": "wait:300",
+      "expect_kind": "space",
+      "label": "7. Wait for computer loading"
+    },
+    {
+      "pick": "wait:300",
+      "expect_kind": "space",
+      "label": "7. Wait for computer loading"
+    },
+    {
+      "pick": "cmd:stations",
+      "expect_kind": "space",
+      "label": "7. Flight/computer control: cmd:stations"
+    },
+    {
+      "pick": "cmd:run",
+      "expect_kind": "menu",
+      "label": "7. Run a loaded program"
+    },
+    {
+      "pick": "menu:d7b4/0",
+      "expect_kind": "menu",
+      "label": "7. Run Navigation"
+    },
+    {
+      "assert": {
+        "programs_loaded": [
+          3,
+          4
+        ],
+        "programs_running": [
+          3,
+          4
+        ]
+      },
+      "label": "7. Jump-2 and Navigation loaded and running"
+    },
+    {
+      "snapshot": "BeforeJump",
+      "label": "7. Before the first jump"
+    },
+    {
+      "pick": "back",
+      "expect_kind": "menu",
+      "label": "7. Return to flight"
+    },
+    {
+      "pick": "cmd:jump",
+      "expect_kind": "space",
+      "label": "7. Open jump destinations"
+    },
+    {
+      "pick": "menu:d7b4/0",
+      "expect_kind": "menu",
+      "label": "7. Jump to Louzy",
+      "expect_label": "louzy"
+    },
+    {
+      "assert": {
+        "system": 3,
+        "planet": 255,
+        "fuel": 61,
+        "clock_days": {
+          "since": "BeforeJump",
+          "delta": 7
+        },
+        "in_space": true
+      },
+      "expect_kind": "space",
+      "label": "7. Arrive at Louzy, fuel 61, seven days later",
+      "frame": true
+    },
+    {
+      "replay": true,
+      "label": "8. Replay the first jump from root",
+      "frame": true
+    }
+  ]
+}

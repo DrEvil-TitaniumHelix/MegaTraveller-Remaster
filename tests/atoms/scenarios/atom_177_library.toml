@@ -1,0 +1,23 @@
+[meta]
+format = 1
+name = "Atom 177: buy library information"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T177"
+
+[place]
+world = 2
+area = 0
+level = 4
+cell = [6, 16]
+outdoors = true
+
+[party]
+credits = 10000
+
+[npcs]
+hostility = "none"
+
+[starport]
+offices = { library = true }

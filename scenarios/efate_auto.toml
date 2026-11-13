@@ -1,0 +1,60 @@
+
+[meta]
+format = 1.4
+name = "efate_auto"
+version = "2"
+author = "DrEvil"
+purpose = "test"
+row = "M8A P20 full auto / M8P M8-7 short NPC burst"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [22, 5]
+outdoors = true
+
+[party]
+members = [
+  { slot = 0, attr = { dex = 8 }, skills = { 10 = 2 } },
+]
+items = [
+  { slot = 0, hands = [{ id = 12, name = "9mm submachinegun", qty = 3, charge = 30 }] },
+]
+
+[npcs]
+hostility = "none"
+set = [
+  { record = 14, hostile = true },
+  { record = 15, hostile = true, cell = [24, 8] },
+  { record = 16, hostile = true },
+]
+
+[squad]
+mode = "broken"
+selected = 0
+
+[squad.encounter]
+id = "efate_quickstart_ambush"
+round = 1
+to_act = "party"
+
+[[squad.travellers]]
+slot = 0
+cell = [22, 5]
+
+[[squad.travellers]]
+slot = 1
+cell = [22, 6]
+
+[[squad.travellers]]
+slot = 2
+cell = [23, 5]
+
+[[squad.travellers]]
+slot = 3
+cell = [23, 6]
+
+[[squad.travellers]]
+slot = 4
+cell = [22, 7]

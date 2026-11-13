@@ -1,0 +1,34 @@
+[meta]
+format = 1.2
+name = "Jump refused without Navigation"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T181"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [33, 4]
+outdoors = true
+
+[npcs]
+hostility = "none"
+
+[party]
+fuel = 124
+
+[ship]
+system = 2
+world = 255
+orbit = -1
+heading = 0
+velocity = [0, 0]
+thrust = 0
+screen = "flight"
+position = [170, 148]
+jump_drive = 1
+ships = []
+programs = [{id = 3, loaded = true, running = true}, {id = 0, loaded = false, running = false}, {id = 4, loaded = true, running = false}]
+

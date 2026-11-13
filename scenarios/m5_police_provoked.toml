@@ -1,0 +1,31 @@
+[meta]
+menu = "Efate starport / Police, provoked"
+format = 1
+name = "Police, Alell provoked"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "M5 police"
+
+[place]
+world = 0
+area = 0
+level = 0
+cell = [19, 27]
+outdoors = true
+
+[party]
+credits = 30000
+items = [
+  { slot = 0, hands = [ { id = 4, name = "9mm auto pistol", qty = 3, charge = 15 }, { id = 8, name = "7mm auto rifle", qty = 2, charge = 20 } ] },
+  { slot = 1, hands = [ { id = 10, name = "18mm shotgun", qty = 2, charge = 10 } ], armor = { id = 31, name = "flak jacket" } },
+  { slot = 2, pack = [ { id = 15, name = "light assault gun", qty = 1, charge = 5 }, { id = 26, name = "dagger" } ] },
+  { slot = 3, hands = [ { id = 21, name = "tl12 laser pistol", qty = 1, charge = 120 } ] },
+]
+
+[starport]
+law = 12
+offences = 2
+
+[npcs]
+hostility = "none"

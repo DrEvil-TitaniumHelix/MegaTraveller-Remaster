@@ -1,0 +1,48 @@
+[meta]
+format = 1.4
+name = "Atom 106: approach with a grenade"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T106"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [7, 15]
+outdoors = true
+
+[party]
+members = [{ slot = 0, attr = { str = 8, dex = 8 }, grenades = { explosive = 2 } }]
+
+[npcs]
+hostility = "none"
+set = [
+  { record = 14, hostile = true, cell = [7, 22] },
+  { record = 15, present = false },
+  { record = 16, present = false },
+]
+
+[squad]
+mode = "broken"
+selected = 0
+travellers = [
+  { slot = 0, cell = [7, 15] },
+  { slot = 1, cell = [7, 16] },
+  { slot = 2, cell = [7, 17] },
+  { slot = 3, cell = [8, 15] },
+  { slot = 4, cell = [8, 16] },
+]
+
+[[encounter]]
+id = "atom_106_grenade"
+start = "scripted"
+trigger = { kind = "area_entry", rect = [[7, 18], [8, 20]] }
+end = "open"
+boundary = "level"
+participants = [14]
+attacker = "party"
+surprise = "none"
+auto_break = true
+allow_save = false

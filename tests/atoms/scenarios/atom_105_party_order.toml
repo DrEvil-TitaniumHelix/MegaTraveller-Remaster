@@ -1,0 +1,22 @@
+[meta]
+format = 1.4
+name = "Atom 105: marching order and formation"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T105"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [7, 15]
+outdoors = true
+starport_area = false
+
+[npcs]
+hostility = "none"
+
+[squad]
+mode = "grouped"
+selected = 0

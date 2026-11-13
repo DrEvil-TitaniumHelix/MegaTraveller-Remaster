@@ -1,0 +1,68 @@
+
+[meta]
+menu = "Efate ground / At a locked door"
+format = 1.4
+name = "efate_locked"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "M8A P1 locked encounter (D-O3b)"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [8, 20]
+outdoors = true
+
+[party]
+members = [
+  { slot = 0, attr = { dex = 8 }, skills = { 10 = 2 } },
+]
+items = [
+  { slot = 0, hands = [{ id = 14, name = "9mm adv. com. rifle", qty = 3, charge = 20 }], pack = [{ id = 4, name = "9mm auto pistol", qty = 1, charge = 15 }] },
+]
+
+[npcs]
+hostility = "none"
+set = [
+  { record = 14, hostile = true, cell = [8, 52] },
+  { record = 15, hostile = true, cell = [7, 52] },
+  { record = 16, hostile = true, cell = [9, 52] },
+]
+
+[[encounter]]
+id = "locked_road"
+start = "scripted"
+trigger = { kind = "area_entry", rect = [[7, 21], [9, 21]] }
+end = "locked"
+boundary = "level"
+escape_zone = [[7, 35], [9, 37]]
+participants = [14, 15, 16]
+allow_save = false
+surprise = "none"
+alerted_rounds = 10
+
+[squad]
+mode = "broken"
+selected = 0
+
+[[squad.travellers]]
+slot = 0
+cell = [8, 20]
+
+[[squad.travellers]]
+slot = 1
+cell = [8, 19]
+
+[[squad.travellers]]
+slot = 2
+cell = [7, 20]
+
+[[squad.travellers]]
+slot = 3
+cell = [9, 20]
+
+[[squad.travellers]]
+slot = 4
+cell = [7, 19]

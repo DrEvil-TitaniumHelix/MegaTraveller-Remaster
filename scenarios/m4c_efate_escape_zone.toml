@@ -1,0 +1,46 @@
+[meta]
+format = 1.1
+name = "Locked fight with an escape zone (Efate road)"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "M4C P1 escape zone (D-O3b)"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [34, 14]
+outdoors = true
+
+[npcs]
+hostility = "none"
+
+[[npc]]
+id = "thug_a"
+role = "thug"
+at = [34, 24]
+record = 17
+[[npc]]
+id = "thug_b"
+role = "thug"
+at = [34, 26]
+record = 18
+weapon = 12
+[[npc]]
+id = "thug_c"
+role = "pirate"
+at = [34, 28]
+record = 19
+
+[[encounter]]
+id = "road_block"
+start = "scripted"
+trigger = { kind = "area_entry", rect = [[33, 10], [34, 20]] }
+end = "locked"
+escape_zone = [[33, 4], [34, 6]]
+boundary = "radius"
+allow_save = false
+participants = ["thug_a", "thug_b", "thug_c"]
+surprise = "none"
+attacker = "npcs"

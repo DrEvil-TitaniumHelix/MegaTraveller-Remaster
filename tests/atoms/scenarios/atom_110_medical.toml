@@ -1,0 +1,32 @@
+[meta]
+format = 1.2
+name = "A wounded Traveller in the ship's sick bay"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T110"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [33, 4]
+outdoors = true
+
+[npcs]
+hostility = "none"
+
+[party]
+fuel = 124
+members = [{slot = 0, hits = 8, hits_max = 21}]
+
+[ship]
+system = 2
+world = 0
+orbit = 1
+heading = 0
+velocity = [0, 0]
+thrust = 0
+screen = "station"
+station = "pilot"
+

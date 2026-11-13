@@ -1,0 +1,32 @@
+[meta]
+format = 1.2
+name = "Land at Straun without a starport"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T116"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [33, 4]
+outdoors = true
+
+[npcs]
+hostility = "none"
+
+[party]
+fuel = 124
+
+[ship]
+system = 0
+world = 1
+orbit = 4
+heading = 0
+velocity = [0, 0]
+thrust = 0
+screen = "flight"
+ships = []
+programs = [{id = 4, loaded = false, running = false}]
+

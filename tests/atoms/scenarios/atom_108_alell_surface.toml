@@ -1,0 +1,17 @@
+[meta]
+format = 1
+name = "Atom 108: Alell surface"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T108"
+
+[place]
+world = 0
+area = 0
+level = 0
+cell = [21, 32]
+outdoors = true
+
+[npcs]
+hostility = "none"

@@ -1,0 +1,36 @@
+[meta]
+format = 1.4
+name = "Arrest with an imperial release"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T197"
+
+[place]
+world = 0
+area = 0
+level = 0
+cell = [19, 27]
+outdoors = true
+starport_area = false
+
+[party]
+credits = 30000
+members = [{ slot = 0, skills = { 58 = 0, 60 = 0, 63 = 0 } }]
+items = [
+  { slot = 0, pack = [{ id = 57, name = "Imperial Release" }] },
+  { slot = 1 },
+  { slot = 2 },
+  { slot = 3 },
+  { slot = 4 },
+]
+
+[starport]
+law = 12
+offences = 2
+
+[npcs]
+hostility = "none"
+
+[seeds]
+T = 102

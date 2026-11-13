@@ -1,0 +1,21 @@
+[meta]
+format = 1
+name = "Atom 167: Lenara gives the warehouse passcard"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T167"
+
+[place]
+world = 7
+area = 1
+level = 4
+cell = [4, 13]
+facing = 0
+outdoors = false
+
+[party]
+items = [{ slot = 0, hands = [{ id = 88, qty = 1 }] }]
+
+[npcs]
+hostility = "none"

@@ -1,0 +1,48 @@
+[meta]
+format = 1.2
+name = "Board the defeated light ship"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T114 T117 T118"
+notes = "Boarding, tactical map, and ship identification in a deterministic encounter."
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [33, 4]
+outdoors = true
+
+[npcs]
+hostility = "none"
+
+[time]
+date = 0
+
+[party]
+fuel = 124
+
+[seeds]
+S = 864
+
+[ship]
+system = 2
+world = 255
+orbit = -1
+position = [170, 148]
+heading = 0
+velocity = [0, 0]
+thrust = 0
+jump_drive = 1
+screen = "station"
+station = "pilot"
+programs = [{id = 1, loaded = true, running = true}]
+ships = [{ x = 0, y = 0, direction = 2, dstx = -1, dsty = -1 }]
+encounter = 1
+encounter_group = { kind = "light", count = 1, faction = 12 }
+
+
+[ship.damage]
+sections = [0, 0, 0, 0]
+hull = 0

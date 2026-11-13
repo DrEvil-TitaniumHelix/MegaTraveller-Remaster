@@ -1,0 +1,17 @@
+[meta]
+format = 1
+name = "Louzy Ilantir"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T157"
+
+[place]
+world = 3
+area = 2
+level = 0
+cell = [15, 23]
+outdoors = true
+
+[npcs]
+hostility = "none"

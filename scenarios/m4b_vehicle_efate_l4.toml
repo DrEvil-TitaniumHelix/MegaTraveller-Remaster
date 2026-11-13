@@ -1,0 +1,26 @@
+[meta]
+menu = "Efate ground / Vehicle"
+format = 1
+name = "Vehicle, Efate level 4"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "M4B vehicle (B12 V menu: Leave / Status in a vehicle)"
+
+[place]
+world = 2
+area = 0
+level = 4
+cell = [7, 8]
+outdoors = true
+
+[party]
+credits = 5000
+
+[vehicle]
+type = 1
+condition = 100
+boarded = true
+
+[npcs]
+hostility = "none"

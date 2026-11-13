@@ -1,0 +1,728 @@
+
+[meta]
+format = 1
+version = "1.0"
+
+[weapon_skill]
+4 = "Combat Rifleman"
+11 = "Combat Rifleman"
+15 = "Small Blade"
+16 = "Demolition"
+18 = "Energy Weapons"
+22 = "Forward Observer"
+28 = "Handgun"
+29 = "Heavy Weapons"
+38 = "Laser Weapons"
+45 = "Neural Weapons"
+50 = "Rifleman"
+62 = "Submachinegun"
+65 = "Large Blade"
+
+[skill_alias]
+"Assault Rifle" = "Combat Rifleman"
+"Energy Weapon" = "Energy Weapons"
+"SMG" = "Submachinegun"
+"Sword" = "Large Blade"
+"Dagger" = "Small Blade"
+"Demolitions" = "Demolition"
+"Hand Combat" = "Brawling"
+
+[role.zhodani_trooper]
+kind = "character"
+label = "Zhodani trooper"
+career = "Army"
+source = "generated"
+picture = 49
+attitude = "hostile"
+morale = "high"
+upp = "773677"
+age = 26
+rank = 0
+rank_title = ""
+hits = [3, 3]
+skills = { "Combat Rifleman" = 3, Computer = 0, "Grav Vehicle" = 0, "Laser Weapons" = 0, "Small Blade" = 1, Tactics = 1 }
+tactics_pool_contribution = 1
+interrupts = false
+equipment = { weapon = 23, armor = 38, clips = 3 }
+notes = "Imperial Army tables stand in for Zhodani service (no Zhodani career tables in the MegaTraveller books on hand); enlisted ranker (no commission attempt). require Tactics-1 = D-O2 military high. Roll log: Laser Weapons-0; Computer-0; Grav Vehicle-0; Combat Rifleman-1; Combat Rifleman-2; Small Blade-1; Combat Rifleman-3; Tactics-1."
+[role.zhodani_trooper.gen]
+career = "Army"
+terms = 2
+seek_commission = false
+tables = [2, 3, 2, 4]
+prefer = ["Laser Weapons", "Combat Rifleman", "Rifleman", "Recon", "Tactics", "Leader", "Brawling", "Small Blade", "+1 Dex"]
+require = { Tactics = 1 }
+seed = 1100
+
+[role.zhodani_officer]
+kind = "character"
+label = "Zhodani officer"
+career = "Army"
+source = "generated"
+picture = 0
+attitude = "hostile"
+morale = "high"
+upp = "A955A4"
+age = 30
+rank = 3
+rank_title = "Major"
+hits = [4, 5]
+skills = { ATV = 1, "Combat Rifleman" = 2, Computer = 0, Electronics = 1, "Grav Vehicle" = 1, Helicopter = 1, "Laser Weapons" = 0, Leader = 1, Mechanical = 1, Medical = 1, Submachinegun = 1, Tactics = 1 }
+tactics_pool_contribution = 1
+interrupts = false
+equipment = { weapon = 21, armor = 38, clips = 2 }
+notes = "Army tables as for the trooper; commissioned; require rank 1+, Tactics-1, Leader-1 (D-O2). Roll log: Laser Weapons-0; Computer-0; Grav Vehicle-0; Combat Rifleman-1; rank 1 Lieutenant; Submachinegun-1; Electronics-1; Medical-1; Grav Vehicle-1; Helicopter-1; rank 2 Captain; Leader-1; Combat Rifleman-2; rank 3 Major; Mechanical-1; Tactics-1; ATV-1."
+[role.zhodani_officer.gen]
+career = "Army"
+terms = 3
+tables = [3, 4, 2]
+prefer = ["Laser Weapons", "Combat Rifleman", "Leader", "Tactics", "Recon", "Handgun", "Small Blade", "+1 Int"]
+require = { rank = 1, Tactics = 1, Leader = 1 }
+seed = 1204
+
+[role.police]
+kind = "character"
+label = "police officer"
+career = "Law Enforcer"
+source = "generated"
+picture = 34
+attitude = "police"
+morale = "average"
+upp = "7B498B"
+age = 26
+rank = 2
+rank_title = "Sergeant"
+hits = [3, 5]
+skills = { Broker = 1, Computer = 0, Forensic = 1, "Grav Vehicle" = 2, Handgun = 0, Interview = 1, Legal = 1, "Robot Ops" = 1, "Small Blade" = 1, Streetwise = 1, Tactics = 1 }
+tactics_pool_contribution = 1
+interrupts = false
+equipment = { weapon = 4, armor = 31, clips = 2 }
+notes = "require Tactics-1 (D-O2 police high). Weapon = the 1990 record's (SC-3: no law-level re-arming). Roll log: Handgun-0; Computer-0; Grav Vehicle-0; Streetwise-1; rank 1 Corporal; Grav Vehicle-1; Robot Ops-1; Legal-1; Grav Vehicle-2; Tactics-1; rank 2 Sergeant; Interview-1; Small Blade-1; Forensic-1; Broker-1."
+[role.police.gen]
+career = "Law Enforcer"
+terms = 2
+tables = [2, 3, 4]
+prefer = ["Handgun", "Submachinegun", "Brawling", "Recon", "Leader", "Tactics", "Streetwise", "Grav Vehicle", "Small Blade"]
+require = { Tactics = 1 }
+seed = 1310
+
+[role.pirate]
+kind = "character"
+label = "pirate"
+career = "Pirate"
+source = "generated"
+picture = 46
+attitude = "hostile"
+morale = "average"
+upp = "778866"
+age = 26
+rank = 1
+rank_title = "Henchman"
+hits = [3, 5]
+skills = { Brawling = 1, Computer = 0, Forgery = 1, "Grav Vehicle" = 0, Pilot = 1, Rifleman = 2, "Small Blade" = 2, Tactics = 1, "Vacc Suit" = 0 }
+tactics_pool_contribution = 1
+interrupts = false
+equipment = { weapon = 12, armor = 30, clips = 3 }
+notes = "require Tactics-1 (D-O2 pirates high). Roll log: Rifleman-0; Computer-0; Grav Vehicle-0; Vacc Suit-0; Brawling-1; rank 1 Henchman; Pilot-1; Small Blade-1; Forgery-1; Rifleman-1; Small Blade-2; Tactics-1; Rifleman-2."
+[role.pirate.gen]
+career = "Pirate"
+terms = 2
+tables = [2, 1, 3]
+prefer = ["Rifleman", "Submachinegun", "Heavy Weapons", "Combat Rifleman", "Small Blade", "Brawling", "Tactics", "Leader", "Pilot"]
+require = { Tactics = 1 }
+seed = 1403
+
+[role.thug]
+kind = "character"
+label = "thug"
+career = "Rogue"
+source = "generated"
+picture = 41
+attitude = "hostile"
+morale = "low"
+upp = "797869"
+age = 22
+rank = 0
+rank_title = ""
+hits = [3, 5]
+skills = { Brawling = 2, Computer = 0, "Grav Vehicle" = 0, Handgun = 0, Streetwise = 2 }
+tactics_pool_contribution = 0
+interrupts = false
+equipment = { weapon = 0, clips = 2 }
+notes = "one Rogue term; no requirement (D-O2 thugs low). Roll log: Handgun-0; Computer-0; Grav Vehicle-0; Streetwise-1; Streetwise-2; Brawling-1; Brawling-2."
+[role.thug.gen]
+career = "Rogue"
+terms = 1
+tables = [1, 2]
+prefer = ["Handgun", "Submachinegun", "Brawling", "Small Blade", "Streetwise", "+1 Str"]
+seed = 1502
+
+[role.guard]
+kind = "character"
+label = "guard"
+career = "Army"
+source = "generated"
+picture = 28
+attitude = "neutral"
+morale = "average"
+upp = "48AC96"
+age = 22
+rank = 0
+rank_title = ""
+hits = [3, 5]
+skills = { "Combat Rifleman" = 1, Computer = 0, "Grav Vehicle" = 1, Rifleman = 1 }
+tactics_pool_contribution = 0
+interrupts = false
+equipment = { weapon = 13, armor = 31, clips = 3 }
+notes = "one Army term, ranker. Roll log: Rifleman-0; Computer-0; Grav Vehicle-0; Combat Rifleman-1; Rifleman-1; +1 Dex; Grav Vehicle-1."
+[role.guard.gen]
+career = "Army"
+terms = 1
+seek_commission = false
+tables = [2, 1]
+prefer = ["Rifleman", "Combat Rifleman", "Handgun", "Brawling", "Recon", "Small Blade"]
+seed = 1600
+
+[role.merchant_guard]
+kind = "character"
+label = "merchant guard"
+career = "Merchant"
+source = "generated"
+picture = 44
+attitude = "neutral"
+morale = "low"
+upp = "886437"
+age = 26
+rank = 1
+rank_title = "4th Officer"
+hits = [3, 5]
+skills = { Computer = 1, "Grav Vehicle" = 0, Handgun = 1, Mechanical = 1, Pilot = 1, "Small Blade" = 1, Streetwise = 1, "Vacc Suit" = 0 }
+tactics_pool_contribution = 0
+interrupts = false
+equipment = { weapon = 10, armor = 29, clips = 2 }
+notes = "merchant crew who keeps the cargo. Roll log: Handgun-0; Computer-0; Grav Vehicle-0; Vacc Suit-0; rank 1 4th Officer; Computer-1; Small Blade-1; Mechanical-1; Handgun-1; Streetwise-1; Pilot-1."
+[role.merchant_guard.gen]
+career = "Merchant"
+terms = 2
+tables = [2, 1, 3]
+prefer = ["Handgun", "Submachinegun", "Brawling", "Small Blade", "Streetwise", "Pilot"]
+seed = 1701
+
+[role.civilian]
+kind = "character"
+label = "civilian"
+career = "none"
+source = "generated"
+picture = 42
+attitude = "neutral"
+morale = "very_low"
+upp = "77A556"
+age = 40
+hits = [4, 5]
+skills = {  }
+tactics_pool_contribution = 0
+interrupts = false
+equipment = { weapon = 26 }
+notes = "RM pr.43 Quick NPC; weapon = the RM pr.42 default (small blade, no armour); significant skills: formula unreadable on the scan (docs/NPCS.md)."
+[role.civilian.gen]
+method = "quick_npc"
+seed = 1800
+
+[role.assassin_amrhein_alazar]
+kind = "character"
+label = "Amrhein Alazar, The Annihilator"
+career = "Imperial Marines, Force Commander"
+source = "printed: 1990 manual pr.136-142 (skills); generated (UPP)"
+picture = 25
+attitude = "hostile"
+morale = "average"
+upp = "774667"
+age = 52
+hits = [3, 4]
+skills = { Medical = 2, "Battle Dress" = 2, "Laser Weapons" = 2, "Assault Rifle" = 4, Brawling = 1, Forgery = 1, Survival = 3, Streetwise = 3 }
+printed = ["skills"]
+tactics_pool_contribution = 0
+interrupts = false
+equipment = { from_record = true }
+notes = "One of the Imperium's 10 Most Wanted; skills as printed beside the portrait (1990 manual pr.136-142; docs/reference/MT1_MANUAL_COMBAT.md 4.13); UPP not printed: RM Quick NPC roll. Equipment = the record's own."
+[role.assassin_amrhein_alazar.gen]
+method = "quick_npc"
+seed = 2001
+
+[role.assassin_katerenya_viridion]
+kind = "character"
+label = "Katerenya Viridion"
+career = "no military career"
+source = "printed: 1990 manual pr.136-142 (skills); generated (UPP)"
+picture = 25
+attitude = "hostile"
+morale = "average"
+upp = "77799B"
+age = 28
+hits = [3, 5]
+skills = { "Energy Weapon" = 3, Stealth = 2, Streetwise = 3, Intrusion = 2, Medical = 1, Handgun = 1 }
+printed = ["skills"]
+tactics_pool_contribution = 0
+interrupts = false
+equipment = { from_record = true }
+notes = "One of the Imperium's 10 Most Wanted; skills as printed beside the portrait (1990 manual pr.136-142; docs/reference/MT1_MANUAL_COMBAT.md 4.13); UPP not printed: RM Quick NPC roll. Equipment = the record's own."
+[role.assassin_katerenya_viridion.gen]
+method = "quick_npc"
+seed = 2002
+
+[role.assassin_gainus_ozar]
+kind = "character"
+label = "Gainus Ozar, The Butcher of Boughene"
+career = "no military background"
+source = "printed: 1990 manual pr.136-142 (skills); generated (UPP)"
+picture = 25
+attitude = "hostile"
+morale = "average"
+upp = "777AA5"
+age = 44
+hits = [3, 5]
+skills = { Streetwise = 3, Stealth = 2, Sword = 1, Demolitions = 1, SMG = 2, Handgun = 2, Brawling = 2, Gambling = 2 }
+printed = ["skills"]
+tactics_pool_contribution = 0
+interrupts = false
+equipment = { from_record = true }
+notes = "One of the Imperium's 10 Most Wanted; skills as printed beside the portrait (1990 manual pr.136-142; docs/reference/MT1_MANUAL_COMBAT.md 4.13); UPP not printed: RM Quick NPC roll. Equipment = the record's own."
+[role.assassin_gainus_ozar.gen]
+method = "quick_npc"
+seed = 2003
+
+[role.assassin_andolus_zelexian]
+kind = "character"
+label = "Andolus Zelexian"
+career = "Imperial Merchants, 2nd Officer"
+source = "printed: 1990 manual pr.136-142 (skills); generated (UPP)"
+picture = 25
+attitude = "hostile"
+morale = "average"
+upp = "774774"
+age = 60
+hits = [3, 4]
+skills = { Trader = 4, "Laser Weapons" = 3, Handgun = 2, Liaison = 2, Pilot = 3 }
+printed = ["skills"]
+tactics_pool_contribution = 0
+interrupts = false
+equipment = { from_record = true }
+notes = "One of the Imperium's 10 Most Wanted; skills as printed beside the portrait (1990 manual pr.136-142; docs/reference/MT1_MANUAL_COMBAT.md 4.13); UPP not printed: RM Quick NPC roll. Equipment = the record's own."
+[role.assassin_andolus_zelexian.gen]
+method = "quick_npc"
+seed = 2004
+
+[role.assassin_maximillian_mortis]
+kind = "character"
+label = "Maximillian (Maxie) Mortis"
+career = "Imperial Marines, Private"
+source = "printed: 1990 manual pr.136-142 (skills); generated (UPP)"
+picture = 25
+attitude = "hostile"
+morale = "average"
+upp = "447476"
+age = 52
+hits = [3, 3]
+skills = { "Jack-of-all-Trades" = 3, Bribery = 2, "Energy Weapons" = 3, Stealth = 2, Gambling = 2 }
+printed = ["skills"]
+tactics_pool_contribution = 0
+interrupts = false
+equipment = { from_record = true }
+notes = "One of the Imperium's 10 Most Wanted; skills as printed beside the portrait (1990 manual pr.136-142; docs/reference/MT1_MANUAL_COMBAT.md 4.13); UPP not printed: RM Quick NPC roll. Equipment = the record's own."
+[role.assassin_maximillian_mortis.gen]
+method = "quick_npc"
+seed = 2005
+
+[role.assassin_szen_sanai]
+kind = "character"
+label = "Szen Sanai"
+career = "Imperial Army, Lieutenant"
+source = "printed: 1990 manual pr.136-142 (skills); generated (UPP)"
+picture = 25
+attitude = "hostile"
+morale = "average"
+upp = "7AA774"
+age = 60
+hits = [4, 6]
+skills = { Forgery = 2, Trader = 1, "Assault Rifle" = 3, "Heavy Weapons" = 2, Handgun = 2, Recruiting = 1, "Battle Dress" = 3 }
+printed = ["skills"]
+tactics_pool_contribution = 0
+interrupts = false
+equipment = { from_record = true }
+notes = "One of the Imperium's 10 Most Wanted; skills as printed beside the portrait (1990 manual pr.136-142; docs/reference/MT1_MANUAL_COMBAT.md 4.13); UPP not printed: RM Quick NPC roll. Equipment = the record's own."
+[role.assassin_szen_sanai.gen]
+method = "quick_npc"
+seed = 2006
+
+[role.assassin_rhevah_hamache]
+kind = "character"
+label = "Rhevah Hamache, The Triggermaster"
+career = "Imperial Scout"
+source = "printed: 1990 manual pr.136-142 (skills); generated (UPP)"
+picture = 25
+attitude = "hostile"
+morale = "average"
+upp = "77A47B"
+age = 30
+hits = [4, 5]
+skills = { Pilot = 3, Handgun = 2, Navigation = 1, Communications = 1, "Laser Weapons" = 2, "Vacc Suit" = 1 }
+printed = ["skills"]
+tactics_pool_contribution = 0
+interrupts = false
+equipment = { from_record = true }
+notes = "One of the Imperium's 10 Most Wanted; skills as printed beside the portrait (1990 manual pr.136-142; docs/reference/MT1_MANUAL_COMBAT.md 4.13); UPP not printed: RM Quick NPC roll. Equipment = the record's own."
+[role.assassin_rhevah_hamache.gen]
+method = "quick_npc"
+seed = 2007
+
+[role.assassin_bolo]
+kind = "character"
+label = "Bolo (name unknown)"
+career = "Imperial Army, Captain"
+source = "printed: 1990 manual pr.136-142 (skills); generated (UPP)"
+picture = 25
+attitude = "hostile"
+morale = "average"
+upp = "777477"
+age = 40
+hits = [3, 5]
+skills = { Leader = 2, "Hand Combat" = 3, "Assault Rifle" = 1, Demolitions = 1, Recon = 3, "Battle Dress" = 1, "Laser Weapons" = 1 }
+printed = ["skills"]
+tactics_pool_contribution = 0
+interrupts = false
+equipment = { from_record = true }
+notes = "One of the Imperium's 10 Most Wanted; skills as printed beside the portrait (1990 manual pr.136-142; docs/reference/MT1_MANUAL_COMBAT.md 4.13); UPP not printed: RM Quick NPC roll. Equipment = the record's own."
+[role.assassin_bolo.gen]
+method = "quick_npc"
+seed = 2008
+
+[role.assassin_demetrieye_jannev]
+kind = "character"
+label = "Demetrieye Jannev"
+career = "no military background"
+source = "printed: 1990 manual pr.136-142 (skills); generated (UPP)"
+picture = 25
+attitude = "hostile"
+morale = "average"
+upp = "7AAAA6"
+age = 38
+hits = [4, 6]
+skills = { Gambling = 2, Streetwise = 3, Brawling = 2, Handgun = 2, Liaison = 1 }
+printed = ["skills"]
+tactics_pool_contribution = 0
+interrupts = false
+equipment = { from_record = true }
+notes = "One of the Imperium's 10 Most Wanted; skills as printed beside the portrait (1990 manual pr.136-142; docs/reference/MT1_MANUAL_COMBAT.md 4.13); UPP not printed: RM Quick NPC roll. Equipment = the record's own."
+[role.assassin_demetrieye_jannev.gen]
+method = "quick_npc"
+seed = 2009
+
+[role.assassin_fallous_cepholon]
+kind = "character"
+label = "Fallous Cepholon"
+career = "no military background"
+source = "printed: 1990 manual pr.136-142 (skills); generated (UPP)"
+picture = 25
+attitude = "hostile"
+morale = "average"
+upp = "77474B"
+age = 40
+hits = [3, 4]
+skills = { Dagger = 1, Handgun = 1, Intrusion = 1, Streetwise = 1 }
+printed = ["skills"]
+tactics_pool_contribution = 0
+interrupts = false
+equipment = { from_record = true }
+notes = "One of the Imperium's 10 Most Wanted; skills as printed beside the portrait (1990 manual pr.136-142; docs/reference/MT1_MANUAL_COMBAT.md 4.13); UPP not printed: RM Quick NPC roll. Equipment = the record's own."
+[role.assassin_fallous_cepholon.gen]
+method = "quick_npc"
+seed = 2010
+
+[role.animal_horned]
+kind = "animal"
+label = "horned brute"
+picture = 30
+attitude = "hostile"
+type = "Chaser"
+weight_kg = 50
+hits = [4, 3]
+wound_modifier = ""
+weapons = "claws+1"
+weapon_hits = 2
+armor = "none"
+reaction = "A9 Am"
+speed = 2
+notes = "RM pr.34-35 table entry; category carnivore because every 1990 record with this picture is hostile; terrain Rough (no DMs): the 1990 maps carry no terrain type."
+[role.animal_horned.gen]
+category = "carnivore"
+terrain = "Rough"
+type_dm = 0
+weight_dm = 0
+seed = 3001
+
+[role.animal_masked]
+kind = "animal"
+label = "masked beast"
+picture = 32
+attitude = "hostile"
+type = "Chaser"
+weight_kg = 800
+hits = [10, 4]
+wound_modifier = "+1D+0"
+weapons = "claws"
+weapon_hits = 2
+armor = "none"
+reaction = "A9 Am"
+speed = 3
+notes = "RM pr.34-35 table entry; category carnivore because every 1990 record with this picture is hostile; terrain Rough (no DMs): the 1990 maps carry no terrain type."
+[role.animal_masked.gen]
+category = "carnivore"
+terrain = "Rough"
+type_dm = 0
+weight_dm = 0
+seed = 3002
+
+[role.animal_fanged]
+kind = "animal"
+label = "fanged hunter"
+picture = 35
+attitude = "hostile"
+type = "Chaser"
+weight_kg = 200
+hits = [6, 2]
+wound_modifier = "+1"
+weapons = "as blade"
+weapon_hits = 2
+armor = "none"
+reaction = "A9 Am"
+speed = 2
+notes = "RM pr.34-35 table entry; category carnivore because every 1990 record with this picture is hostile; terrain Rough (no DMs): the 1990 maps carry no terrain type."
+[role.animal_fanged.gen]
+category = "carnivore"
+terrain = "Rough"
+type_dm = 0
+weight_dm = 0
+seed = 3003
+
+[role.animal_lizard]
+kind = "animal"
+label = "lizard"
+picture = 36
+attitude = "hostile"
+type = "Chaser"
+weight_kg = 200
+hits = [6, 4]
+wound_modifier = "+1"
+weapons = "claws+1 and teeth+1"
+weapon_hits = 2
+armor = "none"
+reaction = "A9 Am"
+speed = 2
+notes = "RM pr.34-35 table entry; category carnivore because every 1990 record with this picture is hostile; terrain Rough (no DMs): the 1990 maps carry no terrain type."
+[role.animal_lizard.gen]
+category = "carnivore"
+terrain = "Rough"
+type_dm = 0
+weight_dm = 0
+seed = 3004
+
+[role.animal_tendril]
+kind = "animal"
+label = "tendril creature"
+picture = 37
+attitude = "hostile"
+type = "Chaser"
+weight_kg = 100
+hits = [6, 6]
+wound_modifier = ""
+weapons = "stinger"
+weapon_hits = 3
+armor = "none"
+reaction = "A9 Am"
+speed = 2
+notes = "RM pr.34-35 table entry; category carnivore because every 1990 record with this picture is hostile; terrain Rough (no DMs): the 1990 maps carry no terrain type."
+[role.animal_tendril.gen]
+category = "carnivore"
+terrain = "Rough"
+type_dm = 0
+weight_dm = 0
+seed = 3005
+
+[role.animal_brute]
+kind = "animal"
+label = "green brute"
+picture = 38
+attitude = "hostile"
+type = "Siren"
+weight_kg = 1600
+hits = [17, 8]
+wound_modifier = "+2D+0"
+weapons = "stinger"
+weapon_hits = 3
+armor = "none"
+reaction = "A6 Fs"
+speed = 0
+notes = "RM pr.34-35 table entry; category carnivore because every 1990 record with this picture is hostile; terrain Rough (no DMs): the 1990 maps carry no terrain type."
+[role.animal_brute.gen]
+category = "carnivore"
+terrain = "Rough"
+type_dm = 0
+weight_dm = 0
+seed = 3006
+
+[role.animal_wraith]
+kind = "animal"
+label = "smoke wraith"
+picture = 50
+attitude = "hostile"
+type = "Chaser"
+weight_kg = 400
+hits = [7, 2]
+wound_modifier = "+1D-3"
+weapons = "teeth+1"
+weapon_hits = 2
+armor = "none"
+reaction = "A6 Am"
+speed = 2
+notes = "RM pr.34-35 table entry; category carnivore because every 1990 record with this picture is hostile; terrain Rough (no DMs): the 1990 maps carry no terrain type."
+[role.animal_wraith.gen]
+category = "carnivore"
+terrain = "Rough"
+type_dm = 0
+weight_dm = 0
+seed = 3007
+
+[picture]
+0 = { role = "zhodani_officer", basis = "no portrait: one record, Efate world 2 area 0 record 31 (id 321, TL12 PGMP, 254 shots, reaction token 96 = the scripted world entry, ASBUILT 5)" }
+1 = { role = "civilian", basis = "Z0: shop-size portrait (112x69): shop and office people, attitude mostly neutral" }
+2 = { role = "civilian", basis = "Z1: shop-size portrait (112x69): shop and office people, attitude mostly neutral" }
+3 = { role = "civilian", basis = "Z2: shop-size portrait (112x69): shop and office people, attitude mostly neutral" }
+4 = { role = "civilian", basis = "Z3: shop-size portrait (112x69): shop and office people, attitude mostly neutral" }
+5 = { role = "civilian", basis = "Z4: shop-size portrait (112x69): shop and office people, attitude mostly neutral" }
+6 = { role = "civilian", basis = "Z5: shop-size portrait (112x69): shop and office people, attitude mostly neutral" }
+7 = { role = "civilian", basis = "Z6: shop-size portrait (112x69): shop and office people, attitude mostly neutral" }
+8 = { role = "civilian", basis = "Z7: shop-size portrait (112x69): shop and office people, attitude mostly neutral" }
+9 = { role = "civilian", basis = "Z8: shop-size portrait (112x69): shop and office people, attitude mostly neutral" }
+10 = { role = "civilian", basis = "Z9: shop-size portrait (112x69): shop and office people, attitude mostly neutral" }
+11 = { role = "civilian", basis = "Z10: shop-size portrait (112x69): shop and office people, attitude mostly neutral" }
+12 = { role = "civilian", basis = "Z11: shop-size portrait (112x69): shop and office people, attitude mostly neutral" }
+13 = { role = "civilian", basis = "Z12: shop-size portrait (112x69): shop and office people, attitude mostly neutral" }
+14 = { role = "civilian", basis = "Z13: shop-size portrait (112x69): shop and office people, attitude mostly neutral" }
+15 = { role = "civilian", basis = "Z14: shop-size portrait (112x69): shop and office people, attitude mostly neutral" }
+16 = { role = "civilian", basis = "Z15: shop-size portrait (112x69): shop and office people, attitude mostly neutral" }
+17 = { role = "civilian", basis = "Z16: shop-size portrait (112x69): shop and office people, attitude mostly neutral" }
+18 = { role = "civilian", basis = "Z17: shop-size portrait (112x69): shop and office people, attitude mostly neutral" }
+19 = { role = "civilian", basis = "Z18: shop-size portrait (112x69): shop and office people, attitude mostly neutral" }
+20 = { role = "civilian", basis = "Z19: shop-size portrait (112x69): shop and office people, attitude mostly neutral" }
+21 = { role = "civilian", basis = "Z20: shop-size portrait (112x69): shop and office people, attitude mostly neutral" }
+22 = { role = "civilian", basis = "Z21: shop-size portrait (112x69): shop and office people, attitude mostly neutral" }
+23 = { role = "civilian", basis = "Z22: shop-size portrait (112x69): shop and office people, attitude mostly neutral" }
+24 = { role = "civilian", basis = "Z23: shop-size portrait (112x69): shop and office people, attitude mostly neutral" }
+25 = { role = "assassin", basis = "Z24 masked face: exactly the ten records that drop the ten assassins ID cards (TRAV.ITM 97-106); per-record roles below" }
+26 = { role = "thug", basis = "Z25 shaggy brute: 15 records, all hostile, mostly 9mm rifles, AV 2" }
+27 = { role = "pirate", basis = "Z26 many-eyed alien: 8 records, 6 hostile, laser rifles and ACRs" }
+28 = { role = "guard", basis = "Z27 helmeted profile: 9 records, 8 neutral" }
+29 = { role = "thug", basis = "Z28 big-eyed alien: 10 records, 8 hostile" }
+30 = { role = "animal_horned", basis = "Z29 horned beast: 13 hostile, sword-class melee (TRAV.ITM 27 stands for natural weapons), hp 50-88" }
+31 = { role = "police", basis = "Z30 insectoid helmet: 17 records, 8 police-attitude, AV 9-12 (combat armour), hp up to 150" }
+32 = { role = "animal_masked", basis = "Z31: 8 hostile, melee 27, hp 30-88" }
+33 = { role = "civilian", basis = "Z32 coral head: 8 records, 5 neutral" }
+34 = { role = "police", basis = "Z33 helmeted trooper: 11 records, 10 police-attitude, AV 10-12" }
+35 = { role = "animal_fanged", basis = "Z34 fanged: 12 hostile, melee 27 or TL12 laser carbine (22), hp 50-100" }
+36 = { role = "animal_lizard", basis = "Z35 lizard: 6 hostile, melee 27, hp 66-100" }
+37 = { role = "animal_tendril", basis = "Z36 tendrils: 5 hostile, melee 27, hp 60-111" }
+38 = { role = "animal_brute", basis = "Z37 green monster: 8 hostile, melee 27, hp 55-100" }
+39 = { role = "guard", basis = "Z38 long-headed alien: 18 records, 10 hostile, 8 neutral" }
+40 = { role = "civilian", basis = "Z39 barbarian: 5 neutral" }
+41 = { role = "thug", basis = "Z40 sunglasses: 14 hostile, incl. the Efate quick-start ambush (world 2 area 0 records 14-16)" }
+42 = { role = "civilian", basis = "Z41: 10 neutral" }
+43 = { role = "pirate", basis = "Z42 wolf face (Vargr?): 5 records" }
+44 = { role = "merchant_guard", basis = "Z43 canine (Vargr?): 4 records, 3 neutral" }
+45 = { role = "merchant_guard", basis = "Z44 bearded: 9 records, 6 neutral" }
+46 = { role = "pirate", basis = "Z45 eyepatch: 19 records, 18 hostile; SMGs, launchers, lasers" }
+47 = { role = "guard", basis = "Z46 eyepiece mercenary: 9 records, 6 hostile" }
+48 = { role = "civilian", basis = "Z47: 8 records, 5 neutral" }
+49 = { role = "zhodani_trooper", basis = "Z48 headset and goggles: 27 records, 25 hostile: the commonest armed hostile" }
+50 = { role = "animal_wraith", basis = "Z49 smoke shape: 4 hostile, melee 27, hp 70-100" }
+51 = { role = "civilian", basis = "Z50 woman: 7 records, 6 neutral" }
+52 = { role = "civilian", basis = "Z51 woman: 6 records, 5 neutral" }
+53 = { role = "civilian", basis = "Z52 tentacled alien: 3 neutral" }
+54 = { role = "civilian", basis = "Z53 shop-size portrait: 1 neutral" }
+55 = { role = "civilian", basis = "Z54 shop-size portrait: 3 neutral records with hp 254/255 (invulnerable: the record flag stays, ASBUILT 5)" }
+
+[[record]]
+world = 1
+area = 0
+record = 28
+role = "assassin_amrhein_alazar"
+basis = "drops Amrhein Alazar's ID card"
+
+[[record]]
+world = 0
+area = 3
+record = 17
+role = "assassin_katerenya_viridion"
+basis = "drops Katerenya Viridion's ID card"
+
+[[record]]
+world = 1
+area = 0
+record = 29
+role = "assassin_gainus_ozar"
+basis = "drops Gainus Ozar's ID card"
+
+[[record]]
+world = 3
+area = 0
+record = 14
+role = "assassin_andolus_zelexian"
+basis = "drops Andolus Zelexian's ID card"
+
+[[record]]
+world = 5
+area = 2
+record = 4
+role = "assassin_maximillian_mortis"
+basis = "drops Maximillian's ID card"
+
+[[record]]
+world = 2
+area = 0
+record = 32
+role = "assassin_szen_sanai"
+basis = "drops Szen Sanai's ID card"
+
+[[record]]
+world = 2
+area = 3
+record = 3
+role = "assassin_rhevah_hamache"
+basis = "drops Rhevah Hamache's ID card"
+
+[[record]]
+world = 7
+area = 0
+record = 10
+role = "assassin_bolo"
+basis = "drops Bolo's ID card"
+
+[[record]]
+world = 6
+area = 1
+record = 2
+role = "assassin_demetrieye_jannev"
+basis = "drops Demetrieye Jannev's ID card"
+
+[[record]]
+world = 5
+area = 0
+record = 14
+role = "assassin_fallous_cepholon"
+basis = "drops Fallous Cepholon's ID card"
+
+[[record]]
+world = 2
+area = 0
+record = 31
+role = "zhodani_officer"
+basis = "id 321: the scripted world-entry NPC (ASBUILT 5); no portrait; carries the TL12 plasma gun (PGMP)"

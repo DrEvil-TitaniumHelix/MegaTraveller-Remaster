@@ -1,0 +1,295 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mt1-scenario-v1",
+  "title": "MT1 scenario file, format 1.4",
+  "description": "docs/SCENARIOS.md is the prose. Every leaf carries x-target: the symbolic path of docs/lockstep/state.schema.json it writes, or 'NEW:<name>' for a target the loader must add. Coordinates are map cells [row, col]; the loader writes t.row = 2*row, t.col = 2*col (half-cell units, proved by the starport shops poke (6,102) = cell (3,51)).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["meta"],
+  "oneOf": [{"required": ["place"]}, {"required": ["save"]}],
+  "properties": {
+    "meta": {
+      "type": "object", "additionalProperties": false,
+      "required": ["format", "name", "version", "author", "purpose"],
+      "properties": {
+        "format":  {"enum": [1, 1.1, 1.2, 1.3, 1.4, 1.5], "description": "1.1 adds NPCs/encounters; 1.2 adds ship; 1.3 adds save; 1.4 adds squad, ground, place.starport_area, member attr / grenades, pack item cell (M8); 1.5 adds party.damage (the docked ship's damage). Earlier files remain valid. Nonempty ship requires 1.2; npc/encounter require 1.1 or later; save requires 1.3; 1.4 fields require 1.4 (validator rules)."},
+        "name":    {"type": "string", "minLength": 1, "maxLength": 60},
+        "menu": { "type": "string", "description": "Testing-scenarios menu entry as \"Group / Label\"; a file without it is not listed" },
+        "version": {"type": "string", "pattern": "^[0-9]+(\\.[0-9]+)*$", "description": "this scenario's own revision"},
+        "author":  {"type": "string", "minLength": 1, "maxLength": 60},
+        "purpose": {"enum": ["test", "play"]},
+        "row":     {"type": "string", "description": "test-sheet row this scenario starts (purpose = test), e.g. 'M4B 7'"},
+        "base":    {"const": "quickstart", "default": "quickstart", "x-target": "NEW:base_block", "description": "starting 0xF86 block before any field applies: the Get Started Quick block (DEFAULT.SAV + T 822C). a [save] scenario (format 1.3) starts from a remaster save instead and may not set base (validator rule)"},
+        "notes":   {"type": "string"}
+      }
+    },
+    "place": {
+      "type": "object", "additionalProperties": false,
+      "required": ["world", "area", "level", "cell"],
+      "x-target": "NEW:place",
+      "description": "applied as one action through the original's own world entry (init_world BE15 / enter_area B164, the path the F10 debug teleport and level doors use), then the party cell; never by poking t.level alone",
+      "properties": {
+        "world":    {"type": "integer", "minimum": 0, "maximum": 7, "x-target": "party.system"},
+        "area":     {"type": "integer", "minimum": 0, "maximum": 5, "x-target": "party.planet"},
+        "level":    {"type": "integer", "minimum": 0, "maximum": 4, "x-target": "t.level"},
+        "cell":     {"$ref": "#/$defs/cell", "x-target": "t.row, t.col (x2)"},
+        "facing":   {"type": "integer", "minimum": 0, "maximum": 7, "x-target": "t.facing"},
+        "outdoors": {"type": "boolean", "x-target": "derived (map name G1/G2/G3 = true, INSIDE = false); checked, never written"},
+        "dark": {"type": "boolean", "x-target": "declares a dark start on level 1 / 2 without a light on (the room is drawn dim); otherwise such a placement is refused"},
+        "starport_area": {"type": "boolean", "x-target": "NEW:t.starport_area (DS:6D20: true writes 0 = inside the starport area, false writes 1 = outside)", "description": "format 1.4. Inside the starport area the 1990 game refuses Break (ASBUILT Break, 615E) and dropping ('Littering in the Starport area is severly prohibited!', drop_item 9190). Outdoor maps only"}
+      }
+    },
+    "party": {
+      "type": "object", "additionalProperties": false,
+      "properties": {
+        "credits": {"type": "integer", "minimum": 0, "maximum": 4294967295, "x-target": "party.credits"},
+        "fuel":    {"type": "integer", "minimum": 0, "maximum": 124, "x-target": "party.fuel"},
+        "damage":  {"type": "object", "additionalProperties": false, "description": "format 1.5: the ship's damage while docked, as the starport Repairs desk reads it (C2..C5 the four sections, C6 the hull); the same bytes [ship] damage writes at take-off, now on a ground start",
+          "properties": {"sections": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"type": "integer", "minimum": 0, "maximum": 255}, "x-target": "party.ship_damage[i]"},
+                         "hull": {"type": "integer", "minimum": 0, "maximum": 255, "x-target": "party.hull_damage"}}},
+        "cargo":   {"type": "array", "maxItems": 20, "items": {"type": "integer", "minimum": 0, "maximum": 255}, "x-target": "party.cargo[i]", "description": "slot bytes as the game stores them, slot 0 first, rest zeroed; 4 = water (lockstep ref 02 step 398)"},
+        "members": {
+          "type": "array", "maxItems": 8,
+          "items": {
+            "type": "object", "additionalProperties": false, "required": ["slot"],
+            "properties": {
+              "slot":     {"type": "integer", "minimum": 0, "maximum": 7, "description": "character record index (0..4 party, 5..7 recruit slots)"},
+              "present":  {"type": "boolean", "x-target": "party.alive_mask bit slot + party.order", "description": "false removes the member from the party (alive bit cleared); slots 0..4 only"},
+              "hits":     {"type": "integer", "minimum": 0, "maximum": 255, "x-target": "party.chars[i].hits"},
+              "hits_max": {"type": "integer", "minimum": 1, "maximum": 255, "x-target": "party.chars[i].hits_max"},
+              "credits":  {"type": "integer", "minimum": 0, "maximum": 4294967295, "x-target": "party.chars[i].credits"},
+              "oxygen":   {"type": "integer", "minimum": 0, "maximum": 255, "x-target": "party.chars[i].oxygen"},
+              "skills":   {"type": "object", "propertyNames": {"pattern": "^([0-9]|[1-6][0-9]|70)$"}, "additionalProperties": {"type": "integer", "minimum": 0, "maximum": 15}, "x-target": "party.chars[i].skills[k]", "description": "saved skill index (record 0x2A+k) = level"},
+              "attr":     {"type": "object", "additionalProperties": false, "x-target": "party.chars[i].attr[0..5] (char+0x14: Str Dex End Int Edu Soc)", "description": "format 1.4: characteristics, only the ones named change", "properties": {"str": {"type": "integer", "minimum": 0, "maximum": 15}, "dex": {"type": "integer", "minimum": 0, "maximum": 15}, "end": {"type": "integer", "minimum": 0, "maximum": 15}, "int": {"type": "integer", "minimum": 0, "maximum": 15}, "edu": {"type": "integer", "minimum": 0, "maximum": 15}, "soc": {"type": "integer", "minimum": 0, "maximum": 15}}},
+              "grenades": {"type": "object", "additionalProperties": false, "x-target": "NEW:grenade_counts (character record 0x1CB..0x1CD, ASBUILT 4 step 1 / match/f172cb.c)", "description": "format 1.4: the built-in grenade counts the T menu throws (E / C / R), 0..9 each", "properties": {"explosive": {"type": "integer", "minimum": 0, "maximum": 9}, "chemical": {"type": "integer", "minimum": 0, "maximum": 9}, "radiation": {"type": "integer", "minimum": 0, "maximum": 9}}}
+            }
+          }
+        },
+        "items": {
+          "type": "array", "maxItems": 8,
+          "items": {
+            "type": "object", "additionalProperties": false, "required": ["slot"],
+            "x-target": "NEW:give_item",
+            "properties": {
+              "slot":    {"type": "integer", "minimum": 0, "maximum": 7},
+              "replace": {"type": "boolean", "default": true, "description": "true: free every object this member holds first, then fill; false: keep, fill free cells"},
+              "hands":   {"type": "array", "maxItems": 2,  "items": {"$ref": "#/$defs/item"}, "x-target": "inventory cells 21, 22 (char+0xF6, +0xF8; schema names armor, weapon)"},
+              "armor":   {"$ref": "#/$defs/item", "x-target": "inventory cell 20 (char+0xF4; state schema name 'actor'): the cell CG 1D0A equips armour into (docs/decode/cg_1d0a_build_party.md). Cell 19 (char+0xF2) is not exposed in format 1: role unproved"},
+              "pack":    {"type": "array", "maxItems": 19, "items": {"$ref": "#/$defs/item"}, "x-target": "party.chars[i].inventory[0..18]"}
+            }
+          }
+        }
+      }
+    },
+    "npcs": {
+      "type": "object", "additionalProperties": false,
+      "properties": {
+        "hostility": {"enum": ["as_map", "all_hostile", "none"], "default": "as_map", "x-target": "NEW:t.monsters[i].attitude (low 2 bits) for every record on place.level", "description": "as_map = W.DAT values; all_hostile = low bits 0; none = low bits 2 (the peaceful value W.DAT uses)"},
+        "set": {
+          "type": "array", "maxItems": 32,
+          "items": {
+            "type": "object", "additionalProperties": false, "required": ["record"],
+            "properties": {
+              "record":  {"type": "integer", "minimum": 1, "maximum": 32, "description": "W.DAT object record of the area, 1-based (t.monsters[record-1])"},
+              "present": {"type": "boolean", "x-target": "NEW:npc_remove (false = gone: cell occupancy cleared, npc_bits set, no reward)"},
+              "cell":    {"$ref": "#/$defs/cell", "x-target": "NEW:npc_move (t.monsters[i].x/y + map cell attr occupancy)"},
+              "level":   {"type": "integer", "minimum": 0, "maximum": 4, "x-target": "t.monsters[i].level"},
+              "hostile": {"type": "boolean", "x-target": "NEW:t.monsters[i].attitude (mon+0x0D low 2 bits: 0 / 2)"},
+              "hits":    {"type": "integer", "minimum": 0, "maximum": 254, "x-target": "NEW:t.monsters[i].hits (mon+0x0A; hit_npc 1B4B:1DA3 damage counter, 0xFF = invulnerable is refused)"},
+              "weapon":  {"type": "integer", "minimum": 0, "maximum": 255, "x-target": "NEW:t.monsters[i].weapon (mon+0x1F, TRAV.ITM id)"},
+              "ammo":    {"type": "integer", "minimum": 0, "maximum": 255, "x-target": "NEW:t.monsters[i].ammo (mon+0x1E, monster_attack 46AD)"}
+            }
+          }
+        }
+      }
+    },
+    "time": {
+      "type": "object", "additionalProperties": false,
+      "properties": {
+        "date": {"type": "integer", "minimum": 0, "maximum": 65535, "x-target": "party.clock"}
+      }
+    },
+    "seeds": {
+      "type": "object", "additionalProperties": false,
+      "description": "srand arguments, LOCKSTEP.md section 5 semantics: the k-th srand of that program after the scenario applies takes this value instead of the BIOS tick word",
+      "properties": {
+        "T":       {"type": "integer", "minimum": 0, "maximum": 65535, "x-target": "rng.T (seeded: state = value at apply, before the first poll)"},
+        "S":       {"type": "integer", "minimum": 0, "maximum": 65535, "x-target": "NEW:pending_srand.S (S launch, M6)"},
+        "CG":      {"type": "integer", "minimum": 0, "maximum": 65535, "x-target": "NEW:pending_srand.CG (next CG run)"},
+        "STARTUP": {"type": "integer", "minimum": 0, "maximum": 65535, "x-target": "NEW:pending_srand.STARTUP (unused by a scenario boot; kept for format parity)"}
+      }
+    },
+    "vehicle": {
+      "type": "object", "additionalProperties": false, "required": ["type"],
+      "x-target": "NEW:vehicle (rent_vehicle 3A05 effects without payment: picture load into DS:62B0, place_vehicle, then board)",
+      "properties": {
+        "type":      {"type": "integer", "minimum": 1, "maximum": 3, "x-target": "DS:6D30 rented model"},
+        "condition": {"type": "integer", "minimum": 0, "maximum": 100, "default": 100, "x-target": "NEW:t.vehicle_condition DS:6D23"},
+        "boarded":   {"type": "boolean", "default": true, "x-target": "t.vehicle (DS:6C3B = type when boarded, else 0) + NEW:t.vehicle_rented DS:6D31 = 1"}
+      }
+    },
+    "starport": {
+      "type": "object", "additionalProperties": false,
+      "description": "M5 fields. Shop stock in MT1 is not a table: it follows the world's tech and law (weapons_store 17F08 and armor_shop 1896C take header f15/law), so stock is set through tech/law",
+      "properties": {
+        "law":        {"type": "integer", "minimum": 0, "maximum": 15, "x-target": "t.world_law"},
+        "tech":       {"type": "integer", "minimum": 0, "maximum": 15, "x-target": "NEW:t.world_tech (area header +0x15)"},
+        "offences":   {"type": "integer", "minimum": 0, "maximum": 255, "x-target": "t.offences (DS:6B76, 'provoked')"},
+        "offices":    {"type": "object", "additionalProperties": false, "x-target": "NEW:t.office_open[e] (DS:5DFB+e, 0 = 'Nobody seems to be in.')",
+                       "properties": {"zenaca": {"type": "boolean"}, "casino": {"type": "boolean"}, "library": {"type": "boolean"}, "tas": {"type": "boolean"}, "hospital": {"type": "boolean"}, "weapons": {"type": "boolean"}, "armor": {"type": "boolean"}, "general": {"type": "boolean"}, "imperial": {"type": "boolean"}}}
+      }
+    },
+    "npc": {
+      "type": "array", "maxItems": 32, "description": "format 1.1: NPCs placed by ROLE from data/npcs.toml (docs/NPCS.md). Each takes one monster record slot of the area",
+      "items": {"$ref": "#/$defs/npc"}
+    },
+    "encounter": {
+      "type": "array", "maxItems": 16, "description": "format 1.1: encounter definitions for this scenario (D-O3, D-O3b, D-O4, D-O10); the game's own story fights live in data/encounters.toml with the same shape plus `where`",
+      "items": {"$ref": "#/$defs/encounter"}
+    },
+    "ship": {"$ref": "#/$defs/ship", "description": "format 1.2. Party fields apply in a pre-S checkpoint; other fields are validated and pending until the S runtime exists."},
+    "ground": {"type": "array", "maxItems": 32, "x-target": "NEW:place_object (1B4B:01FA as drop_item 9190 places a dropped item: the ground-object table party+0x602 and the cell's object chain cell[0] >> 1)", "description": "format 1.4: items lying on cells of place.level (the P16 ground tray reads them)", "items": {"type": "object", "additionalProperties": false, "required": ["cell", "id"], "properties": {"cell": {"$ref": "#/$defs/cell"}, "id": {"type": "integer", "minimum": 0, "maximum": 254}, "name": {"type": "string"}, "qty": {"type": "integer", "minimum": 0, "maximum": 255}, "charge": {"type": "integer", "minimum": 0, "maximum": 255}}}},
+    "squad": {"type": "object", "additionalProperties": false, "description": "format 1.4 (M8A squad layer, product mode only; --faithful refuses every scenario). Nothing here enters the save block: it is the squad state P1 / P2 / P6 / P21 hold beside the 1990 state (DESIGN.md P9b).", "properties": {"mode": {"enum": ["grouped", "broken"], "default": "grouped", "x-target": "NEW:squad.broken (DS:6D0E combat flag; walkers placed by break_party 615E unless travellers give cells)"}, "selected": {"type": "integer", "minimum": 0, "maximum": 4, "x-target": "DS:6B6A (set_leader)", "description": "party slot of the selected Traveller ('Traveller 1' = 0)"}, "travellers": {"type": "array", "maxItems": 5, "items": {"type": "object", "additionalProperties": false, "required": ["slot"], "properties": {"slot": {"type": "integer", "minimum": 0, "maximum": 4}, "cell": {"$ref": "#/$defs/cell", "x-target": "walker[slot] position (half-cells x2); broken only"}, "facing": {"type": "integer", "minimum": 0, "maximum": 7, "x-target": "walker[slot] heading (0 = north, clockwise)"}, "acted": {"type": "boolean", "x-target": "NEW:squad.unit[slot].move_left = 0, attack_left = false (both pips spent this round)"}, "attacked": {"type": "boolean", "x-target": "NEW:squad.unit[slot].attack_left = false (Attack pip spent, Move left)"}, "route": {"type": "array", "maxItems": 62, "items": {"$ref": "#/$defs/cell"}, "x-target": "walker[slot] route bytes (+0x16 length, +0x17.. directions; f32f0.c:52-58): the standing move order, each cell next to the one before"}, "target": {"type": "integer", "minimum": 1, "maximum": 32, "x-target": "walker[slot] f5 (the standing target record)"}}}}, "encounter": {"type": "object", "additionalProperties": false, "required": ["id"], "x-target": "NEW:encounter_state (P1: active id, round, side to act, surprise; written by a 1.4 scenario, read back as in 1.1)", "properties": {"id": {"type": "string", "description": "an encounter of data/encounters.toml on this level or of this file's [[encounter]]"}, "round": {"type": "integer", "minimum": 1, "maximum": 999, "default": 1}, "to_act": {"enum": ["party", "npcs"], "default": "party", "description": "the side whose turn it is"}, "surprised": {"enum": ["none", "party", "npcs"], "default": "none", "description": "the surprise result of round 1 (RULES 1.2), fixed instead of rolled"}}}, "npc": {"type": "array", "maxItems": 32, "items": {"type": "object", "additionalProperties": false, "required": ["record"], "x-target": "NEW:squad.npc[record]", "properties": {"record": {"type": "integer", "minimum": 1, "maximum": 32}, "role": {"type": "string", "description": "a data/npcs.toml role replacing the mapped one for this record, or \"none\" = no entry (R-9 derived fallback)"}, "skills": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0, "maximum": 15}, "description": "Players' Manual skill name = level, over the role's sheet (e.g. Tactics = 2)"}, "hits": {"type": "integer", "minimum": 0, "maximum": 255, "description": "product-mode hits left (the role's a + b pool); 0 = dead (M8-3)"}, "engaged": {"type": "boolean", "description": "the NPC has engaged the party in the active encounter"}, "alerted_rounds": {"type": "integer", "minimum": 1, "maximum": 100, "description": "D-O3 ALERTED with this many rounds of clock left"}, "speed": {"type": "integer", "minimum": 0, "maximum": 2, "description": "its movement last round: 0 stood, 1 walked, 2 ran (the target-movement DM, RULES 2.3)"}}}}}},
+    "save": {
+      "type": "object", "additionalProperties": false, "required": ["file"],
+      "description": "format 1.3 (M7). The scenario IS the save: the loader restores this remaster save (mt1::save, magic MT1SAVE) as Continue Old Game does, and takes no other section (validator rule). The sample is generated by the exe, never committed (it holds the player's T.DAT data).",
+      "properties": {
+        "file": {"type": "string", "minLength": 1, "maxLength": 200, "pattern": "^(?![\\\\/])(?![A-Za-z]:)(?!.*(^|[\\\\/])\\.\\.([\\\\/]|$)).+\\.mtsav$", "x-target": "NEW:restore", "description": "path of a .mtsav relative to this scenario file, confined to its folder: no absolute path, no drive letter, no .. segment (a shared scenario can only name a file beside itself)"}
+      }
+    }
+  },
+  "$defs": {
+    "space_pair": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "integer", "minimum": -32768, "maximum": 32767}},
+    "space_marker": {
+      "type": "object", "additionalProperties": false, "required": ["x", "y", "direction", "dstx", "dsty"],
+      "description": "D8: five signed words, DS:3AB0 + 10*i. Direction uses the game's compass order: 0 E, 1 NE, 2 N, 3 NW, 4 W, 5 SW, 6 S, 7 SE; -1 inactive. 7CF8 stores active=-1 or 100+direction.",
+      "properties": {
+        "x": {"type": "integer", "minimum": -32768, "maximum": 32767, "x-target": "s.ships[i].x"},
+        "y": {"type": "integer", "minimum": -32768, "maximum": 32767, "x-target": "s.ships[i].y"},
+        "direction": {"type": "integer", "minimum": -1, "maximum": 7, "x-target": "s.ships[i].active"},
+        "dstx": {"type": "integer", "minimum": -32768, "maximum": 32767, "x-target": "s.ships[i].dstx"},
+        "dsty": {"type": "integer", "minimum": -32768, "maximum": 32767, "x-target": "s.ships[i].dsty"}
+      }
+    },
+    "ship": {
+      "type": "object", "additionalProperties": false,
+      "properties": {
+        "system": {"type": "integer", "minimum": 0, "maximum": 7, "x-target": "party.system", "description": "party+006, selects ?.STP; defaults to place.world"},
+        "world": {"oneOf": [{"type": "integer", "minimum": 0, "maximum": 5}, {"const": 255}], "x-target": "party.planet", "description": "party+007, STP world byte minus one; 255 = no world after jump. Defaults to place.area"},
+        "orbit": {"type": "integer", "minimum": -1, "maximum": 79, "x-target": "s.current_object", "description": "zero-based STP object index; -1 = free flight. Not the STP orbit-radius byte. Checked against system object count"},
+        "position": {"$ref": "#/$defs/space_pair", "x-target": "s.x, s.y", "description": "signed system-map coordinates; omission uses D0D/39AF placement"},
+        "heading": {"type": "integer", "minimum": 0, "maximum": 7, "x-target": "s.heading, s.direction, s.view_heading", "description": "4FCB game compass order: 0 E, 1 NE, 2 N, 3 NW, 4 W, 5 SW, 6 S, 7 SE. Writes heading=90+n, direction=1+n, view_heading=n"},
+        "velocity": {"$ref": "#/$defs/space_pair", "x-target": "s.vx, s.vy"},
+        "thrust": {"type": "integer", "minimum": -2, "maximum": 2, "x-target": "s.thrust, s.moving", "description": "4FCB: moving = thrust != 0"},
+        "fuel_scoops": {"type": "boolean", "x-target": "party.ship_flags (bits 3..4, 0x18)", "description": "4FCB: the ship scoops fuel at rest at a gas giant only when both bits are set; false clears them (the 1990 then says unable to process atmosphere)"},
+        "jump_drive": {"type": "integer", "minimum": 0, "maximum": 2, "x-target": "party.ship_flags (bits 0..1)", "description": "3F5: 0 none, 1 Jump-1, 2 Jump-2; 3 would index past the two jump-link rows. Preserve other bits, including scoop hardware"},
+        "programs": {"type": "array", "maxItems": 20, "items": {
+          "type": "object", "additionalProperties": false, "required": ["id", "loaded", "running"],
+          "properties": {"id": {"type": "integer", "minimum": 0, "maximum": 15, "x-target": "party.programs[i] (low nibble)"},
+                         "loaded": {"type": "boolean", "x-target": "party.programs[i] (0x80)"},
+                         "running": {"type": "boolean", "x-target": "party.programs[i] (0x20)"}}
+        }, "x-target": "party.programs[i]", "description": "AC..BF symbolic computer slots: id | (loaded ? 0x80 : 0) | (running ? 0x20 : 0), per 121C/A7B. Empty slot = {id:0,loaded:false,running:false}; remainder zeroed. Undecoded bits 0x10/0x40 are unwritable"},
+        "damage": {
+          "type": "object", "additionalProperties": false,
+          "properties": {
+            "sections": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"type": "integer", "minimum": 0, "maximum": 255}, "x-target": "party.ship_damage[i]", "description": "C2..C5 in save-schema order; no invented component names"},
+            "hull": {"type": "integer", "minimum": 0, "maximum": 255, "x-target": "party.hull_damage", "description": "C6; C7..C9 remain outside this format"}
+          }
+        },
+        "screen": {"enum": ["flight", "jump", "station"], "x-target": "NEW:space_entry", "description": "Enter 4FCB / 3F5 / AF17 after initialization and pending writes; jump requires orbit=-1, station requires station"},
+        "station": {"enum": ["pilot", "gunner_1", "gunner_2", "computer", "engineering", "comms", "crew"], "x-target": "s.station_id, s.station_active", "description": "AF17/MT1CTL: pilot=10, gunner_1=11, gunner_2=12, computer=13, engineering=14, comms=15, crew=17. Requires screen=station, sets station_active=1"},
+        "ships": {"type": "array", "maxItems": 18, "items": {"$ref": "#/$defs/space_marker"}, "x-target": "s.ships[i], s.ship_count", "description": "D8 table = 18 records x 10 bytes. Replacement prefix, ship_count = length; remaining rows become {x:0,y:0,active:-1,dstx:0,dsty:0}. [] clears encounters"},
+        "encounter": {"type": "integer", "minimum": 1, "maximum": 18, "x-target": "s.encounter", "description": "one-based selected group; requires a live entry in ship.ships"},
+        "encounter_group": {
+          "type": "object", "additionalProperties": false, "required": ["kind", "count", "faction"], "x-target": "NEW:space_encounter_group",
+          "description": "Replace selected group's four tactical enemies through 720F/7302/740E, then 6D09 placement. Needed because markers alone do not define hostile ships. Clear four records first; unused slots stay empty.",
+          "properties": {
+            "kind": {"enum": ["light", "medium", "heavy"], "x-target": "NEW:space_encounter_group.kind (720F/7302/740E)"},
+            "count": {"type": "integer", "minimum": 1, "maximum": 4, "x-target": "NEW:space_encounter_group.count"},
+            "faction": {"type": "integer", "minimum": 1, "maximum": 13, "x-target": "NEW:space_encounter_group.faction (enemy+0E)"}
+          }
+        }
+      }
+    },
+    "rect": {"type": "array", "prefixItems": [{"$ref": "#/$defs/cell"}, {"$ref": "#/$defs/cell"}], "minItems": 2, "maxItems": 2,
+             "description": "[[row0, col0], [row1, col1]] inclusive, on the encounter's level; row0 <= row1, col0 <= col1"},
+    "npc": {
+      "type": "object", "additionalProperties": false, "required": ["role", "at"],
+      "x-target": "NEW:npc_spawn (writes one monster record DS:63F4 + 0x2E*k as init_world BE15 builds it: id, state = level, home x/y and x/y, type, picture, hp, level, flags, weapon, ammo; plus the squad-layer NPC sheet from the role)",
+      "properties": {
+        "id":       {"type": "string", "pattern": "^[a-z][a-z0-9_]*$", "description": "handle for encounter participants; unique in the file"},
+        "role":     {"type": "string", "description": "a role of data/npcs.toml (validator checks)"},
+        "at":       {"$ref": "#/$defs/cell", "x-target": "monster home x/y (0x03/0x05) and x/y (0x20/0x22), both x2"},
+        "level":    {"type": "integer", "minimum": 0, "maximum": 4, "x-target": "monster.state 0x02", "description": "default place.level"},
+        "record":   {"type": "integer", "minimum": 1, "maximum": 32, "description": "the area's record slot this NPC takes over (its W.DAT NPC is replaced for this run). Omitted: the loader appends a slot (DS:6418 + 1); the validator refuses that when the area already has 32 records"},
+        "attitude": {"enum": ["hostile", "police", "neutral"], "x-target": "monster.flags 0x0D low 2 bits (0 / 1 / 2)", "description": "default = the role's attitude"},
+        "weapon":   {"type": "integer", "minimum": 0, "maximum": 254, "x-target": "monster.weapon 0x1F", "description": "default = the role's equipment.weapon"},
+        "ammo":     {"type": "integer", "minimum": 0, "maximum": 255, "x-target": "monster.ammo 0x1E", "description": "total rounds; default = (clips + 1) x the weapon's rounds per clip (TRAV.ITM 0x28), capped at 255"},
+        "hits":     {"type": "integer", "minimum": 1, "maximum": 254, "x-target": "monster.hp 0x0A", "description": "1990 hp (the --faithful skill input); the product uses the role's hits a/b. Default 8 x the role's best skill for its weapon, min 8"},
+        "facing":   {"type": "integer", "minimum": 0, "maximum": 7, "x-target": "monster.facing 0x24"},
+        "leash":    {"type": "integer", "minimum": 0, "maximum": 31, "x-target": "monster.type 0x07 >> 3", "description": "wander radius in tiles around `at` (default 0 = stands)"}
+      }
+    },
+    "trigger": {
+      "type": "object", "additionalProperties": false, "required": ["kind"],
+      "x-target": "NEW:encounter.trigger (squad layer; read by P1)",
+      "description": "what starts a scripted encounter",
+      "properties": {
+        "kind":    {"enum": ["area_entry", "story_flag", "dialogue", "object_taken"]},
+        "rect":    {"$ref": "#/$defs/rect", "description": "area_entry: any Traveller (or the grouped party) stands on a cell inside, including where a scenario or a level entry puts them"},
+        "flag":    {"enum": ["killed", "rewarded", "spawn_taken"], "description": "story_flag: an NPC id's kill bit (party+8) or reward bit (party+0x3A), or a floor-item spawn's taken bit (save +0x6C): all 1990 save bits"},
+        "npc_id":  {"type": "integer", "minimum": 0, "maximum": 511, "description": "story_flag killed / rewarded: the W.DAT NPC id (record 0x00)"},
+        "spawn":   {"type": "integer", "minimum": 0, "maximum": 255, "description": "story_flag spawn_taken: the bit index (header spawn_base + i)"},
+        "record":  {"type": "integer", "minimum": 1, "maximum": 32, "description": "dialogue: the record talked to"},
+        "state":   {"type": "integer", "minimum": 0, "maximum": 65535, "description": "dialogue: fires when that record's conversation state (0x1A) becomes this value"},
+        "item":    {"type": "integer", "minimum": 0, "maximum": 254, "description": "object_taken: TRAV.ITM id picked up on this level"}
+      }
+    },
+    "encounter": {
+      "type": "object", "additionalProperties": false, "required": ["id", "start", "end"],
+      "x-target": "NEW:encounter_defs (squad-layer table, read by P1 at level entry; never in the save block: D-O10 forbids saving while one is active, and a finished story fight stays finished through the 1990 kill bits of its NPCs)",
+      "properties": {
+        "id":             {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+        "start":          {"enum": ["sight", "scripted"], "description": "sight = D-O3 (a willing armed NPC within the radius with line of sight, or a hostile verb by the party); scripted = the trigger"},
+        "trigger":        {"$ref": "#/$defs/trigger"},
+        "end":            {"enum": ["open", "locked"], "description": "open = ends after n_rounds closing with no willing armed NPC in sight; locked = only when every hostile participant is destroyed, the party is down, or a Traveller reaches the escape zone"},
+        "n_rounds":       {"type": "integer", "minimum": 1, "maximum": 20, "default": 1, "description": "open only"},
+        "escape_zone":    {"$ref": "#/$defs/rect", "description": "locked only: a conscious Traveller ending a turn inside leaves the fight (the encounter ends for the party; alerted NPCs stay alerted)"},
+        "boundary":       {"enum": ["radius", "screen", "area", "level"], "default": "radius", "description": "which NPCs take turns: within `radius` squares of a Traveller (the default), on the 1990 screen (within 6 rows and 11 columns of any Traveller; the engine's own data-less fight), inside `rect`, or the whole level"},
+        "radius":         {"type": "integer", "minimum": 1, "maximum": 64, "default": 29, "description": "ENCOUNTER_RADIUS (D-O3)"},
+        "rect":           {"$ref": "#/$defs/rect", "description": "boundary = area"},
+        "auto_break":     {"type": "boolean", "default": true, "description": "D-O4: break the party at start where the 1990 rule allows"},
+        "allow_save":     {"type": "boolean", "default": false, "description": "D-O10: false = Save is refused while this encounter is active. Format 1.4 (M8C save-anywhere, O-21) allows true: a save mid-encounter restores mid-encounter (validator: true needs format 1.4; data/encounters.toml keeps false until save-anywhere enables it)"},
+        "participants":   {"oneOf": [{"const": "all_hostile_in_boundary"},
+                                     {"type": "array", "minItems": 1, "maxItems": 32, "items": {"oneOf": [{"type": "integer", "minimum": 1, "maximum": 32}, {"type": "string"}]}}],
+                           "default": "all_hostile_in_boundary", "description": "record numbers of the area and/or [[npc]] ids; a locked fight ends when every hostile participant is destroyed"},
+        "alerted_rounds": {"type": "integer", "minimum": 1, "maximum": 100, "default": 10, "description": "D-O3 ALERTED: an NPC that engaged keeps approaching at exploration pace until dead, fled, or out of the radius this many rounds; while one is alerted on the level: no healing, resting or time-skip (number by play-test)"},
+        "surprise":       {"enum": ["roll", "attackers", "defenders", "none"], "default": "roll", "description": "roll = RULES 1.2 Leader + Recon task by the attacking side; attackers / defenders = that side has surprise without a roll; none = nobody"},
+        "attacker":       {"enum": ["npcs", "party"], "default": "npcs", "description": "scripted starts: the side making the first hostile move (it rolls for surprise); sight starts decide it at run time"},
+        "where":          {"type": "object", "additionalProperties": false, "required": ["world", "area", "level"], "description": "data/encounters.toml only: the level this story fight belongs to",
+                           "properties": {"world": {"type": "integer", "minimum": 0, "maximum": 7}, "area": {"type": "integer", "minimum": 0, "maximum": 5}, "level": {"type": "integer", "minimum": 0, "maximum": 4}}},
+        "source":         {"type": "string", "description": "where the fight comes from (Clue Book page, ASBUILT section)"},
+        "notes":          {"type": "string"}
+      }
+    },
+    "encounter_file": {
+      "type": "object", "additionalProperties": false, "required": ["meta", "encounter"],
+      "description": "data/encounters.toml: the game's own story fights",
+      "properties": {"meta": {"type": "object", "additionalProperties": false, "required": ["format", "version"],
+                              "properties": {"format": {"enum": [1.1, 1.4]}, "version": {"type": "string"}}},
+                     "encounter": {"type": "array", "items": {"allOf": [{"$ref": "#/$defs/encounter"}, {"required": ["where"]}]}}}
+    },
+    "cell": {"type": "array", "prefixItems": [{"type": "integer", "minimum": 0}, {"type": "integer", "minimum": 0}], "minItems": 2, "maxItems": 2, "description": "[row, col] map cell"},
+    "item": {
+      "type": "object", "additionalProperties": false, "required": ["id"],
+      "x-target": "party.objects[n].id/qty/charge (a free record, id 0xFF, allocated as alloc_object 179B2 does) + the inventory cell = n+1",
+      "properties": {
+        "id":     {"type": "integer", "minimum": 0, "maximum": 254, "description": "TRAV.ITM record index"},
+        "name":   {"type": "string", "description": "must equal the TRAV.ITM name for id (validator check; readability only)"},
+        "qty":    {"type": "integer", "minimum": 0, "maximum": 255, "x-target": "party.objects[n].qty (object+1: reloads / quantity)"},
+        "charge": {"type": "integer", "minimum": 0, "maximum": 255, "x-target": "party.objects[n].charge (object+2: rounds in the weapon = chamber state, charges)"},
+        "cell": {"type": "integer", "minimum": 0, "maximum": 18, "x-target": "party.chars[i].inventory[cell]", "description": "format 1.4, pack items only: the pack cell (default: the first free one, in file order). Lets a row name 'slot 4'"}
+      }
+    }
+  }
+}

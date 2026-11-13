@@ -1,0 +1,59 @@
+
+[meta]
+format = 1.4
+name = "efate_alerted"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "M8A P1 / P21 alerted (O-3 / O-10)"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [7, 15]
+outdoors = true
+
+[party]
+members = [
+  { slot = 0, attr = { dex = 8 }, skills = { 10 = 2 } },
+]
+items = [
+  { slot = 0, hands = [{ id = 14, name = "9mm adv. com. rifle", qty = 3, charge = 20 }], pack = [{ id = 4, name = "9mm auto pistol", qty = 1, charge = 15 }] },
+]
+
+[npcs]
+hostility = "none"
+set = [
+  { record = 14, hostile = true, cell = [7, 50] },
+  { record = 15, present = false },
+  { record = 16, present = false },
+]
+
+[squad]
+mode = "broken"
+selected = 0
+
+[[squad.travellers]]
+slot = 0
+cell = [7, 15]
+
+[[squad.travellers]]
+slot = 1
+cell = [7, 16]
+
+[[squad.travellers]]
+slot = 2
+cell = [7, 17]
+
+[[squad.travellers]]
+slot = 3
+cell = [8, 15]
+
+[[squad.travellers]]
+slot = 4
+cell = [8, 16]
+
+[[squad.npc]]
+record = 14
+alerted_rounds = 10

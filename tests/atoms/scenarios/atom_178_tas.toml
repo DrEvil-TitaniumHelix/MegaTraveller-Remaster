@@ -1,0 +1,20 @@
+[meta]
+format = 1
+name = "Atom 178: Travellers Aid Society briefing"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T178"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [32, 19]
+outdoors = true
+
+[npcs]
+hostility = "none"
+
+[starport]
+offices = { tas = true }

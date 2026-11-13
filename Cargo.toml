@@ -1,0 +1,17 @@
+[workspace]
+resolver = "2"
+members = ["crates/engine", "crates/mt1", "crates/app"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+publish = false
+
+[workspace.dependencies]
+mt-engine = { path = "crates/engine" }
+mt1 = { path = "crates/mt1" }
+
+[profile.release]
+opt-level = 3
+lto = "thin"

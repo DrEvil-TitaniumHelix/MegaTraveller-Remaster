@@ -1,0 +1,22 @@
+[meta]
+format = 1.4
+name = "The last original Traveller dies"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T187"
+
+[place]
+world = 5
+area = 0
+level = 0
+cell = [8, 12]
+facing = 2
+starport_area = false
+
+[npcs]
+hostility = "none"
+
+[party]
+members = [{slot = 1, present = false}, {slot = 2, present = false}, {slot = 3, present = false}, {slot = 4, present = false}]
+items = [{slot = 0, hands = [], pack = []}]

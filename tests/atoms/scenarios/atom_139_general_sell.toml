@@ -1,0 +1,27 @@
+[meta]
+format = 1
+name = "T139 sell supplies"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T139 sell supplies"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [32, 25]
+outdoors = true
+
+[party]
+credits = 30000
+
+[[party.items]]
+slot = 0
+pack = [{ id = 45, name = "tl9 med kit", qty = 1 }]
+
+[npcs]
+hostility = "none"
+
+[starport]
+offices = { general = true }

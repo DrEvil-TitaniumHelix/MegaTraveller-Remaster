@@ -1,0 +1,22 @@
+[meta]
+format = 1
+name = "Atom: starport desk, one berth free"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "M5 starport panel"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [33, 4]
+outdoors = true
+
+[party]
+credits = 30000
+cargo = [4, 4, 4, 4]
+members = [ { slot = 4, present = false } ]
+
+[npcs]
+hostility = "none"

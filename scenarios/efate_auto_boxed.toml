@@ -1,0 +1,50 @@
+[meta]
+format = 1.4
+name = "efate_auto_boxed"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "M8P M8-7 boxed"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [27, 32]
+outdoors = true
+
+[party]
+members = [
+  { slot = 0, hits = 21, hits_max = 21, attr = { str = 8, dex = 8 } },
+  { slot = 1, present = false }, { slot = 2, present = false },
+  { slot = 3, present = false }, { slot = 4, present = false },
+]
+
+[npcs]
+hostility = "none"
+set = [
+  { record = 14, hostile = true, cell = [29, 24], weapon = 12, ammo = 50 },
+  { record = 15, present = false }, { record = 16, present = false },
+]
+
+[[encounter]]
+id = "m8p_autofire"
+start = "sight"
+end = "open"
+n_rounds = 1
+participants = [14]
+surprise = "none"
+allow_save = false
+
+[squad]
+mode = "broken"
+selected = 0
+
+[squad.encounter]
+id = "m8p_autofire"
+round = 1
+to_act = "party"
+
+[[squad.travellers]]
+slot = 0
+cell = [27, 32]

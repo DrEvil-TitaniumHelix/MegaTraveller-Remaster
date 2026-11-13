@@ -1,0 +1,62 @@
+
+[meta]
+format = 1.4
+name = "efate_orders"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "M8A P3 / P6 standing orders"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [22, 5]
+outdoors = true
+
+[party]
+members = [
+  { slot = 0, attr = { dex = 8 }, skills = { 10 = 2 } },
+]
+items = [
+  { slot = 0, hands = [{ id = 14, name = "9mm adv. com. rifle", qty = 3, charge = 20 }], pack = [{ id = 4, name = "9mm auto pistol", qty = 1, charge = 15 }] },
+]
+
+[npcs]
+hostility = "none"
+set = [
+  { record = 14, hostile = true },
+  { record = 15, hostile = true },
+  { record = 16, hostile = true },
+]
+
+[squad]
+mode = "broken"
+selected = 0
+
+[squad.encounter]
+id = "efate_quickstart_ambush"
+round = 1
+to_act = "party"
+
+[[squad.travellers]]
+slot = 0
+cell = [22, 5]
+
+[[squad.travellers]]
+slot = 1
+cell = [22, 6]
+route = [[23, 7], [23, 8], [23, 9], [23, 10], [23, 11], [23, 12], [23, 13], [23, 14], [23, 15], [23, 16], [23, 17], [23, 18], [23, 19], [23, 20]]
+target = 14
+
+[[squad.travellers]]
+slot = 2
+cell = [23, 5]
+
+[[squad.travellers]]
+slot = 3
+cell = [23, 6]
+
+[[squad.travellers]]
+slot = 4
+cell = [22, 7]

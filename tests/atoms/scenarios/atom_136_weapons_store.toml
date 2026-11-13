@@ -1,0 +1,29 @@
+[meta]
+format = 1
+name = "T136-T137 weapons store: ammo and selling"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T136-T137 weapons store: ammo and selling"
+
+[place]
+world = 2
+area = 0
+level = 4
+cell = [8, 7]
+outdoors = true
+
+[party]
+credits = 30000
+
+[[party.items]]
+slot = 0
+pack = [{ id = 4, name = "9mm auto pistol", qty = 1, charge = 15 }]
+
+[npcs]
+hostility = "none"
+
+[starport]
+law = 4
+tech = 13
+offices = { weapons = true }

@@ -1,0 +1,22 @@
+[meta]
+menu = "Efate starport / Medkit in the pack (hospital, Use)"
+format = 1
+name = "Medkit in pack"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "M4B 7"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [32, 9]
+outdoors = true
+
+[party]
+members = [ { slot = 0, hits = 8, hits_max = 21 } ]
+items = [ { slot = 0, replace = false, pack = [ { id = 45, name = "tl9 med kit", qty = 1 } ] } ]
+
+[npcs]
+hostility = "none"

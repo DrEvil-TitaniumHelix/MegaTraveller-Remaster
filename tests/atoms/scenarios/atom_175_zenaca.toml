@@ -1,0 +1,23 @@
+[meta]
+format = 1
+name = "Atom 175: rent at Zenaca Vehicles"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T175 T176"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [29, 24]
+outdoors = true
+
+[party]
+credits = 30000
+
+[npcs]
+hostility = "none"
+
+[starport]
+offices = { zenaca = true }

@@ -1,0 +1,23 @@
+[meta]
+format = 1
+name = "Atom 102: return the thieves pendant"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T102"
+
+[place]
+world = 2
+area = 0
+level = 3
+cell = [2, 8]
+facing = 4
+outdoors = false
+
+[party]
+members = [{ slot = 0, credits = 500 }]
+items = [{ slot = 0, hands = [{ id = 55, name = "thieves pendant", qty = 1 }] }]
+
+[npcs]
+hostility = "none"
+

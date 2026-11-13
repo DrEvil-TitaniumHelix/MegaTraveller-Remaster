@@ -1,0 +1,45 @@
+[package]
+name = "megatraveller"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[[example]]
+name = "atom_ui"
+path = "src/atom_ui_example.rs"
+test = true
+
+[[example]]
+name = "fontfit_frames"
+path = "src/fontfit_frames_example.rs"
+test = false
+
+[features]
+dev = []
+
+[dev-dependencies]
+syn = { version = "2", features = ["full", "visit"] }
+
+[dependencies]
+mt-engine.workspace = true
+mt1.workspace = true
+winit = "0.30"
+softbuffer = "0.4"
+muda = "0.17"
+fontdue = "0.9"
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["preserve_order"] }
+toml = "0.8"
+cpal = "0.18"
+
+[target.'cfg(target_os = "linux")'.dependencies]
+gtk = "0.18"
+
+[target.'cfg(target_os = "windows")'.dependencies]
+windows-sys = { version = "0.60", features = ["Win32_UI_WindowsAndMessaging", "Win32_Graphics_Gdi", "Win32_UI_Controls", "Win32_UI_Shell", "Win32_UI_Shell_Common", "Win32_System_Console", "Win32_Security", "Win32_Storage_FileSystem", "Win32_System_JobObjects", "Win32_System_Threading", "Win32_System_Diagnostics_ToolHelp", "Win32_System_Pipes"] }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+objc2 = "0.6"
+objc2-app-kit = { version = "0.3", default-features = false, features = ["std", "NSMenu"] }
+objc2-foundation = { version = "0.3", default-features = false, features = ["std", "NSObject"] }

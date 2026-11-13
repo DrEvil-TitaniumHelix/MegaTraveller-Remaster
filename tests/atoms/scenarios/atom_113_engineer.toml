@@ -1,0 +1,34 @@
+[meta]
+format = 1.2
+name = "Engineering after damage"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T113"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [33, 4]
+outdoors = true
+
+[npcs]
+hostility = "none"
+
+[party]
+fuel = 124
+
+[ship]
+system = 2
+world = 0
+orbit = 1
+heading = 0
+velocity = [0, 0]
+thrust = 0
+screen = "station"
+station = "engineering"
+[ship.damage]
+sections = [25, 0, 0, 0]
+hull = 5
+

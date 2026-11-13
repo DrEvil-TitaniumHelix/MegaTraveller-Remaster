@@ -1,0 +1,19 @@
+
+[meta]
+menu = "Save and load / Readout at Louzy"
+format = 1
+name = "m8c_readout_louzy"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "M8C Q8 overview / readout"
+
+[place]
+world = 3
+area = 0
+level = 3
+cell = [6, 20]
+outdoors = true
+
+[npcs]
+hostility = "none"

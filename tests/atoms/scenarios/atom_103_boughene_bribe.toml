@@ -1,0 +1,22 @@
+[meta]
+format = 1
+name = "Atom 103: Boughene informant"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T103"
+
+[place]
+world = 1
+area = 0
+level = 0
+cell = [23, 22]
+facing = 0
+outdoors = true
+
+[party]
+members = [{ slot = 0, credits = 20000, skills = { 8 = 10 } }]
+
+[npcs]
+hostility = "none"
+

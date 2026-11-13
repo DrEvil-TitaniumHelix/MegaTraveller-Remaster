@@ -1,0 +1,17 @@
+[meta]
+format = 1
+name = "San Delgado research station"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T151"
+
+[place]
+world = 2
+area = 2
+level = 0
+cell = [7, 14]
+outdoors = true
+
+[npcs]
+hostility = "none"

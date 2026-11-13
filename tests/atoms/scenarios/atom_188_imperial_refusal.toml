@@ -1,0 +1,17 @@
+[meta]
+format = 1
+name = "Imperial base refusal"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "T188"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [29, 17]
+facing = 4
+
+[npcs]
+hostility = "none"

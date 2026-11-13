@@ -1,0 +1,28 @@
+
+[meta]
+menu = "Efate ground / Pack with a pistol in it"
+format = 1.4
+name = "efate_pack"
+version = "1"
+author = "DrEvil"
+purpose = "test"
+row = "M8B P13-P16 loaded party"
+
+[place]
+world = 2
+area = 0
+level = 0
+cell = [32, 9]
+outdoors = true
+
+[party]
+members = [
+  { slot = 0, attr = { dex = 8 }, skills = { 10 = 2 } },
+  { slot = 2, hits = 3 },
+]
+items = [
+  { slot = 0, hands = [{ id = 8, name = "7mm auto rifle", qty = 2, charge = 20 }], pack = [{ id = 45, name = "tl9 med kit", qty = 1, cell = 0 }, { id = 61, name = "emeralds", qty = 1, cell = 4 }, { id = 4, name = "9mm auto pistol", qty = 1, charge = 15, cell = 6 }] },
+]
+
+[npcs]
+hostility = "none"

@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mt1-npcs-v1",
+  "title": "MT1 NPC compendium (data/npcs.toml), format 1",
+  "description": "docs/NPCS.md is the prose. One entry per ROLE (role.<name>), a picture -> role default for the 1990 monster records, and per-record overrides. tools/npc_generate.py --check validates this schema, the references, and that every [gen] recipe re-rolls to the stored values.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["meta", "role", "picture"],
+  "properties": {
+    "meta": {"type": "object", "additionalProperties": false, "required": ["format", "version"],
+             "properties": {"format": {"const": 1}, "version": {"type": "string", "pattern": "^[0-9]+(\\.[0-9]+)*$"}}},
+    "weapon_skill": {"type": "object", "description": "1990 TRAV.ITM skill index (item byte 0x25) -> Players' Manual skill name",
+                     "propertyNames": {"pattern": "^[0-9]{1,2}$"}, "additionalProperties": {"type": "string"}},
+    "skill_alias": {"type": "object", "description": "printed skill name -> Players' Manual skill name", "additionalProperties": {"type": "string"}},
+    "role": {"type": "object", "propertyNames": {"pattern": "^[a-z][a-z0-9_]*$"},
+             "additionalProperties": {"oneOf": [{"$ref": "#/$defs/character"}, {"$ref": "#/$defs/animal"}]}},
+    "picture": {"type": "object", "description": "1990 record picture id (byte 0x09; Z.DAT chunk id-1) -> default role for every record with it",
+                "propertyNames": {"pattern": "^[0-9]{1,3}$"},
+                "additionalProperties": {"type": "object", "additionalProperties": false, "required": ["role", "basis"],
+                                         "properties": {"role": {"type": "string"}, "basis": {"type": "string"}}}},
+    "record": {"type": "array", "description": "per-record role overrides",
+               "items": {"type": "object", "additionalProperties": false, "required": ["world", "area", "record", "role", "basis"],
+                         "properties": {"world": {"type": "integer", "minimum": 0, "maximum": 7}, "area": {"type": "integer", "minimum": 0, "maximum": 5},
+                                        "record": {"type": "integer", "minimum": 1, "maximum": 32}, "role": {"type": "string"}, "basis": {"type": "string"}}}}
+  },
+  "$defs": {
+    "attitude": {"enum": ["hostile", "police", "neutral"], "description": "record 0x0D & 3: 0 hostile, 1 police, 2 neutral (the 1990 values)"},
+    "character": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind", "label", "career", "source", "picture", "attitude", "morale", "upp", "age", "hits", "skills", "tactics_pool_contribution", "interrupts", "equipment", "gen"],
+      "properties": {
+        "kind": {"const": "character"},
+        "label": {"type": "string"},
+        "career": {"type": "string", "description": "PM career whose tables rolled it, 'none' (Quick NPC), or the printed service"},
+        "source": {"type": "string", "description": "'generated', or 'printed: <book page>' for printed values"},
+        "picture": {"type": "integer", "minimum": 0, "maximum": 255, "description": "portrait for an NPC placed by role ([[npc]] in a scenario)"},
+        "attitude": {"$ref": "#/$defs/attitude", "description": "default for an NPC placed by role; a mapped 1990 record keeps its own attitude"},
+        "morale": {"enum": ["very_low", "low", "average", "high"], "description": "PM p.84-85 NPC morale level: Formidable / Difficult / Routine / Simple base difficulty"},
+        "upp": {"type": "string", "pattern": "^[0-9A-HJ]{6}$", "description": "Str Dex End Int Edu Soc, Traveller hex"},
+        "age": {"type": "integer", "minimum": 14, "maximum": 120},
+        "rank": {"type": "integer", "minimum": 0, "maximum": 6},
+        "rank_title": {"type": "string"},
+        "hits": {"type": "array", "prefixItems": [{"type": "integer"}, {"type": "integer"}], "minItems": 2, "maxItems": 2, "description": "PM p.66 a/b from life force Str+Dex+End"},
+        "skills": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0, "maximum": 15}, "description": "Players' Manual skill names (or printed names resolved through skill_alias)"},
+        "printed": {"type": "array", "items": {"enum": ["upp", "age", "hits", "skills"]}, "description": "fields taken from print: they override the generated values and --check skips them"},
+        "tactics_pool_contribution": {"type": "integer", "minimum": 0, "maximum": 15, "description": "this unit's share of its side's Tactics pool (PM p.66: the pool = sum of Tactics); defaults to skills.Tactics, a balance knob (D-O2)"},
+        "interrupts": {"const": false, "description": "v1: NPC interrupts off (R-13)"},
+        "equipment": {"type": "object", "additionalProperties": false,
+          "properties": {"weapon": {"type": "integer", "minimum": 0, "maximum": 254, "description": "TRAV.ITM id"},
+                         "armor": {"type": "integer", "minimum": 29, "maximum": 39, "description": "TRAV.ITM armour id"},
+                         "clips": {"type": "integer", "minimum": 0, "maximum": 20, "description": "spare magazines (PM clip counts per weapon row)"},
+                         "from_record": {"const": true, "description": "use the mapped 1990 record's own weapon / ammunition"}}},
+        "notes": {"type": "string"},
+        "gen": {"type": "object", "description": "the recipe tools/npc_generate.py re-rolls (docs/NPCS.md 'Generation')",
+          "properties": {"method": {"const": "quick_npc"}, "career": {"type": "string"}, "terms": {"type": "integer", "minimum": 1, "maximum": 3},
+                         "seek_commission": {"type": "boolean"}, "tables": {"type": "array", "items": {"enum": [1, 2, 3, 4]}, "minItems": 1},
+                         "prefer": {"type": "array", "items": {"type": "string"}}, "require": {"type": "object", "additionalProperties": {"type": "integer"}},
+                         "seed": {"type": "integer", "minimum": 0}},
+          "required": ["seed"], "additionalProperties": false}
+      }
+    },
+    "animal": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind", "label", "picture", "attitude", "type", "weight_kg", "hits", "weapons", "weapon_hits", "armor", "reaction", "speed", "gen"],
+      "properties": {
+        "kind": {"const": "animal"}, "label": {"type": "string"}, "picture": {"type": "integer", "minimum": 0, "maximum": 255},
+        "attitude": {"$ref": "#/$defs/attitude"},
+        "type": {"type": "string", "description": "RM pr.34 animal type (Chaser, Pouncer, Grazer ...)"},
+        "weight_kg": {"type": "integer", "minimum": 1},
+        "hits": {"type": "array", "prefixItems": [{"type": "integer"}, {"type": "integer"}], "minItems": 2, "maxItems": 2, "description": "RM pr.35 weight effects Hits / Wound columns, rolled"},
+        "wound_modifier": {"type": "string", "description": "RM pr.35 wound modifier column (modifies the weapon's hits)"},
+        "weapons": {"type": "string"}, "weapon_hits": {"type": "integer", "minimum": 1, "maximum": 3},
+        "armor": {"type": "string", "description": "RM pr.35 animal armour result ('none', jack, mesh+1 ...)"},
+        "reaction": {"type": "string", "pattern": "^(Ap|As|A[0-9]+) (Fs|Am|F[0-9]+)$", "description": "RM pr.35 codes: attack part then flee part"},
+        "speed": {"type": "integer", "minimum": 0, "maximum": 4},
+        "notes": {"type": "string"},
+        "gen": {"type": "object", "additionalProperties": false, "required": ["category", "seed"],
+                "properties": {"category": {"enum": ["herbivore", "omnivore", "carnivore", "scavenger"]}, "terrain": {"type": "string"},
+                               "type_dm": {"type": "integer"}, "weight_dm": {"type": "integer"}, "seed": {"type": "integer", "minimum": 0}}}
+      }
+    }
+  }
+}
