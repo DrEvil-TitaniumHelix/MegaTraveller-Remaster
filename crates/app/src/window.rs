@@ -529,7 +529,6 @@ fn open_speaker() -> Option<(Arc<Mutex<Speaker>>, cpal::Stream)> {
 }
 impl Win {
     pub fn classic_combat(&self) -> bool { self.app.look.classic_combat }
-    pub fn disable_unused_skills(&self) -> bool { self.app.look.disable_unused_skills }
     pub fn autosave(&self) -> bool { self.app.look.autosave != megatraveller::look::MenuSound::Off }
     pub fn balance_options(&self) -> mt1::ground::rules::balance::Options { self.app.look.balance_options() }
     pub fn new(scale: usize, square: bool, faithful: bool, mouse: bool) -> Result<Self, String> {
@@ -548,6 +547,7 @@ impl Win {
             if square { look.shape = Shape::Square; }
         }
         look.window_size = clamp_window_size(look.window_size);
+        mt1::record::set_no_unused_skills(look.disable_unused_skills);
         Platform::init()?;
         let menus = if faithful { None } else { Some(Rc::new(RefCell::new(Menus::new(&look).map_err(|e| format!("menu: {e}"))?))) };
         let mut builder = EventLoop::<Event>::with_user_event();
