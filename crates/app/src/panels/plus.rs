@@ -421,7 +421,7 @@ pub fn character_rows(scene: &Scene, assets: &Assets, member: u8) -> Vec<HelpRow
     let mut carried: Vec<(String, usize)> = Vec::new();
     for slot in 0..19 { if let Some(name) = item(slot) { match carried.iter_mut().find(|(n, _)| *n == name) { Some(e) => e.1 += 1, None => carried.push((name, 1)) } } }
     let carried: Vec<String> = carried.into_iter().map(|(n, k)| if k > 1 { format!("{n} x{k}") } else { n }).collect();
-    let skills: Vec<String> = (0..80).filter(|&i| b(rec + 0x29 + i) != 0).map(|i| {
+    let skills: Vec<String> = (0..80).filter(|&i| mt1::record::shown_skill(i as u8, b(rec + 0x29 + i)) != 0).map(|i| {
         use mt1::ground::rules::adapters::{SKILL_JOT, SKILL_LEADER, SKILL_RECON, SKILL_TACTICS};
         let name = assets.ds_string(0x1479, i).map(capitalised).unwrap_or_else(|| match i as u8 { SKILL_TACTICS => "Tactics".into(), SKILL_LEADER => "Leader".into(), SKILL_RECON => "Recon".into(), SKILL_JOT => "Jack-of-all-Trades".into(), _ => format!("Skill {i}") });
         format!("{name}-{}", b(rec + 0x29 + i))

@@ -269,7 +269,7 @@ fn main() {
         process::exit(0)
     }
     let mut win = if restored.is_some() {None} else {Some(early.take().unwrap_or_else(|| Box::new(Win::new(v.n, v.square, v.faithful, args.mouse).unwrap_or_else(|e| die(&e, 1)))))};
-    if let Some(win)=&mut win {win.panel_assets(&mut Dir(dir.clone())); mt1::save::AUTOSAVE.store(win.autosave(), std::sync::atomic::Ordering::Relaxed);}
+    if let Some(win)=&mut win {win.panel_assets(&mut Dir(dir.clone())); mt1::save::AUTOSAVE.store(win.autosave(), std::sync::atomic::Ordering::Relaxed); mt1::record::set_no_unused_skills(win.disable_unused_skills());}
     let squad = restored.as_ref().map_or_else(||!v.faithful && !win.as_ref().unwrap().classic_combat(),|g|g.squad.is_some());
     let mut balance = restored.as_ref().map_or_else(||win.as_ref().unwrap().balance_options(),|g|g.balance);
     let squad_state = || {

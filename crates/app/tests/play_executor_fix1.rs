@@ -105,6 +105,14 @@ fn incomplete(rows: &[Value]) {
         assert!(assertions.iter().any(|a|a.get(field).is_some()),"FIRST_TEST lacks required {field} guard");
     }
 }
+#[test] #[ignore = "plays the whole first-jump route: about five minutes in a debug build"]
+fn first_jump_route_hash_is_unchanged() {
+    assert!(std::env::var_os("MT1_GAMEFILES").is_some(), "MT1_GAMEFILES is required for live executor proof");
+    let route=PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../acceptance/play/routes/quickstart_first_jump.json");
+    let r=Command::new(env!("CARGO_BIN_EXE_megatraveller")).arg("--play").arg(route).arg("--out").arg(dir().join("out")).stdin(Stdio::null()).output().unwrap();
+    code(&r,0);
+    assert!(String::from_utf8_lossy(&r.stdout).contains("final hash s:3f63d5c57bb4c7b1"),"{}",String::from_utf8_lossy(&r.stdout));
+}
 #[test] fn landing_route_guards_prove_required_state() {
     let path=PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../acceptance/play/routes/quickstart_to_landing.json");
     let r:Value=serde_json::from_slice(&fs::read(path).unwrap()).unwrap();

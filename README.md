@@ -83,6 +83,9 @@ Look settings are cosmetic: they never change the game.
 View > Components docks a panel, opens it in its own window or hides it;
 View > Reset layout restores the default arrangement. File > Options holds
 Classic 1990 combat, Easier grenade range and Selective NPC autofire.
+The Plus menu holds Disable unused skills (off by default): when on, skills
+that never do anything in the game are left out of new characters and hidden
+on the character screens.
 
 ## Testing scenarios
 

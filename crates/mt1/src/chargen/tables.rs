@@ -30,6 +30,7 @@ impl Ds {
     pub fn skill_name(&self, id: u8) -> String { self.str(self.u16(0x1184 + 8 * id as usize) as usize) }
     pub fn skill_short(&self, id: u8) -> String { self.str(self.u16(0x1186 + 8 * id as usize) as usize) }
     pub fn skill_type(&self, id: u8) -> u8 { self.u8(0x118A + 8 * id as usize) }
+    pub fn unused(&self, id: u8) -> bool { self.skill_type(id) == 0 && record::unused_skill(self.u8(0x118B + 8 * id as usize)) }
     pub fn item_name(&self, id: u8) -> String { self.str(self.u16(0x16C3 + 3 * id as usize) as usize) }
     pub fn service_name(&self, s: u8) -> String { self.pstr(0x14EE, s as usize) }
     pub fn rule(&self, service: u8, k: usize) -> i8 { self.i8(0x1502 + 6 * service as usize + k) }
@@ -132,6 +133,10 @@ impl Cg {
         self.skills.clear(); self.skill_count = 0;
         let w = ui.work(); for i in 0..57 { w[i] = self.ds.u8(0x2D0E + i) } w[W_SKILLS_PTR] = 0; w[W_SKILLS_PTR + 1] = 0;
         ui.set_text_color(0); let s = self.ds.str(0x2CBC); ui.draw_text_at(0, 27, 185, 8, 5, &s);
+    }
+    pub fn live(&self, id: u8) -> bool {
+        if self.ds.skill_type(id) != 2 { return !self.ds.unused(id) }
+        self.specialties.iter().find(|(c, _)| *c == id).is_none_or(|(_, l)| l.iter().any(|&m| !self.ds.unused(m)))
     }
     pub fn find_skill(&self, id: u8) -> Option<usize> { self.skills.iter().position(|n| n.id as i8 as i32 == id as i32) }
     pub fn find_item(&self, w: &Work, item: u8) -> usize { (1..=16).rev().find(|&s| w[29 + s] as i8 as i32 == item as i32).unwrap_or(0) }

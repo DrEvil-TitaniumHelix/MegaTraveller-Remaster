@@ -441,7 +441,7 @@ impl CgUi for Screens {
         let sn = self.ds_str(self.ds_word(0x14F8 + 2 * service));
         let rn = self.ds_str(self.ds_word((self.ds.u8(0x1800 + 5 * rank + service) as usize) * 2 + 0x1138));
         let (mut skills, mut d) = (vec![], 0x11B4usize);
-        for level in &rec[0x2A..0x2A + 79] { while self.ds.u8(d + 7) == 0xFF { d += 8 } if *level != 0 { skills.push((self.ds_str(self.ds_word(d + 2)), *level)) } d += 8 }
+        for (k, level) in rec[0x2A..0x2A + 79].iter().enumerate() { while self.ds.u8(d + 7) == 0xFF { d += 8 } if crate::record::shown_skill(k as u8 + 1, *level) != 0 { skills.push((self.ds_str(self.ds_word(d + 2)), *level)) } d += 8 }
         let items: Vec<String> = (0..19).filter_map(|k| { let c = i16::from_le_bytes([rec[0xCC + 2 * k], rec[0xCD + 2 * k]]); (c > 0).then(|| self.ds_str(self.ds_word(0x16C0 + 3 * c as usize))) }).collect();
         let sh = Sheet { name: &name, stats: rec[0x14..0x1A].try_into().unwrap(), service: service as i16, service_name: &sn, rank_name: &rn, cash: i32::from_le_bytes(rec[0xFC..0x100].try_into().unwrap()), age: rec[0x22], hits: (rec[0x25], rec[0x24]), tas: rec[0x28] & 1 != 0,
             skills: skills.iter().map(|(n, l)| (n.as_str(), *l)).collect(), items: items.iter().map(String::as_str).collect() };

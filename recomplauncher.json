@@ -86,6 +86,15 @@
       "defaults": { "classic_combat": "false" }
     },
     {
+      "id": "skills", "label": "Unused skills",
+      "help": "Some skills never did anything in the 1990 game. Disabling them keeps them out of new characters and off the character screens.",
+      "choices": [
+        { "label": "Keep all skills", "set": { "disable_unused_skills": "false" } },
+        { "label": "Disable unused skills", "set": { "disable_unused_skills": "true" } }
+      ],
+      "defaults": { "disable_unused_skills": "false" }
+    },
+    {
       "id": "autosave", "label": "Autosave",
       "help": "Saves your game by itself as you play.",
       "choices": [

@@ -22,7 +22,7 @@ pub enum Action {
     Scale(ScaleMode), Shape(Shape), Filter(Filter), Screen(Screen), Palette(Palette), Font(FontChoice),
     Bold, TextColour(TextColour), Background(Background), Fullscreen, Windowed, Quit, Scenario(PathBuf),
     Layout(LayoutPreset), Host(ComponentId, HostKind), LogLines(u8), ResetLayout, DebugInitiative, Follow,
-    ClassicCombat,
+    ClassicCombat, UnusedSkills,
     GrenadeRange, NpcSelectiveAutofire,
     Minimap,
     GameKey(u8),
@@ -40,6 +40,7 @@ impl Action {
             Self::Bold => look.bold = !look.bold, Self::Background(v) => look.background = *v,
             Self::TextColour(v) => look.text_colour = *v,
             Self::ClassicCombat => look.classic_combat = !look.classic_combat,
+            Self::UnusedSkills => look.disable_unused_skills = !look.disable_unused_skills,
             Self::GrenadeRange => look.grenade_range = !look.grenade_range,
             Self::NpcSelectiveAutofire => look.npc_selective_autofire = !look.npc_selective_autofire,
             Self::Layout(p) => look.layout.preset = *p,
@@ -56,6 +57,7 @@ impl Action {
             Self::Font(v) => v == look.text_font(),
             Self::TextColour(v) => *v == if look.high_contrast_text() { TextColour::HighContrast } else { TextColour::Original },
             Self::ClassicCombat => look.classic_combat,
+            Self::UnusedSkills => look.disable_unused_skills,
             Self::GrenadeRange => look.grenade_range,
             Self::NpcSelectiveAutofire => look.npc_selective_autofire,
             Self::Host(id, host) => look.layout.components.get(*id).map_or(HostKind::Docked, |s| s.host) == *host,
@@ -98,6 +100,8 @@ impl Menus {
         for (id, label, tab) in PLUS_TABS { plus.append(&IconMenuItem::with_id(id, label, true, emblem(Some(tab)), None))?; }
         let mut menus = Self { root, text, view, scenario_menu: None, scenarios: Vec::new(), choices: Vec::new(), fonts: Vec::new(), entries: Vec::new(),
             catalog: Catalog::default(), fonts_dir: Look::path().with_file_name("fonts"), look: look.clone() };
+        plus.append(&PredefinedMenuItem::separator())?;
+        menus.add(&plus, "Disable unused skills", Action::UnusedSkills)?;
         for (id, label) in GAME_KEYS { file.append(&MenuItem::with_id(id, label, true, None))?; }
         file.append(&PredefinedMenuItem::separator())?;
         menus.add(&file, "Fullscreen (F11)", Action::Fullscreen)?;
@@ -320,6 +324,14 @@ mod tests {
         }
         Action::GrenadeRange.apply(&mut look);
         assert!(look.grenade_range && !look.npc_selective_autofire);
+    }
+    #[test]
+    fn unused_skills_toggle_is_off_by_default_and_persists() {
+        let mut look = Look::default();
+        assert!(!look.disable_unused_skills && !Action::UnusedSkills.checked(&look));
+        Action::UnusedSkills.apply(&mut look);
+        let restored: Look = toml::from_str(&toml::to_string(&look).unwrap()).unwrap();
+        assert!(restored.disable_unused_skills && Action::UnusedSkills.checked(&restored));
     }
     #[test]
     fn independent_knobs_and_radio_selection() {

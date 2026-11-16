@@ -7,6 +7,11 @@ pub const W_AGE: usize = 24; pub const W_HITS_A: usize = 27; pub const W_HITS_B:
 pub const W_PENSION: usize = 50; pub const W_TAS: usize = 52; pub const W_SKILLS_PTR: usize = 53;
 pub const POOL_SLOTS: usize = 15;
 pub fn pool() -> Slots { Slots::new(Char::SIZE, POOL_SLOTS).unwrap() }
+thread_local! { static NO_UNUSED_SKILLS: std::cell::Cell<bool> = const { std::cell::Cell::new(false) }; }
+pub const UNUSED_SKILLS: [u8; 34] = [1, 2, 3, 6, 7, 10, 12, 14, 20, 21, 24, 25, 27, 30, 31, 32, 33, 34, 37, 41, 44, 46, 47, 51, 52, 54, 55, 56, 58, 60, 63, 68, 70, 71];
+pub fn set_no_unused_skills(on: bool) { NO_UNUSED_SKILLS.with(|v| v.set(on)) }
+pub fn unused_skill(slot: u8) -> bool { NO_UNUSED_SKILLS.with(std::cell::Cell::get) && UNUSED_SKILLS.contains(&slot) }
+pub fn shown_skill(slot: u8, level: u8) -> u8 { if unused_skill(slot) { 0 } else { level } }
 
 pub struct CgTables<'a> { ds: &'a [u8] }
 impl<'a> CgTables<'a> {

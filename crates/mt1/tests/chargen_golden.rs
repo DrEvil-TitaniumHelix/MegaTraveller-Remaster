@@ -267,6 +267,37 @@ fn eight_sessions_match_the_original() {
 }
 
 #[test]
+fn disabled_unused_skills_are_never_granted() {
+    use mt1::chargen::skills::{add_skill, choose_skills};
+    use mt1::record::{set_no_unused_skills, UNUSED_SKILLS, W_SERVICE, W_STAT};
+    let Some(oracle) = oracle_env::oracle() else { return };
+    let Some(ds) = cg_image(&oracle) else { println!("SKIP: no CG.DAT (MT1_GAMEFILES) and no oracle work/mt1/CG.exe"); return };
+    let unused = |id: u8| UNUSED_SKILLS.contains(&ds.u8(0x118B + 8 * id as usize));
+    let fake = |seed: u16, groups: VecDeque<Vec<Key>>| Fake { ds: &ds, rng: Rng::new(seed), work: [0; 57], files: Overlay::new(None), keys: VecDeque::new(), groups, text: vec![], widths: vec![0; 128], steps: vec![], pool_rec: None, height: 8, spacing: 0, windows: 0, current: 0 };
+    let run = |on: bool| {
+        set_no_unused_skills(on);
+        let (mut awards, mut ui) = (Cg::new(ds.clone()), fake(0, VecDeque::new()));
+        for id in (0..95u8).filter(|&id| ds.skill_type(id) == 0) { assert_eq!(add_skill(&mut awards, &mut ui, id, 1) == 0, on && unused(id), "award of skill {id:#04x}, option {on}") }
+        let mut granted = awards.skills.iter().filter(|n| unused(n.id)).count();
+        for service in 0..5u8 { for seed in 0..40u16 {
+            let mut pick = Rng::new(seed ^ 0x5A5A);
+            let mut ui = fake(seed, (0..400).map(|_| { let mut g = vec![keys::DOWN; (pick.next() % 12) as usize]; g.push(13); g }).collect());
+            ui.work[W_SERVICE] = service; ui.work[W_STAT + 4] = 12;
+            let mut cg = Cg::new(ds.clone()); cg.earned = 60;
+            assert!(choose_skills(&mut cg, &mut ui).is_ok());
+            assert!(cg.skills.iter().map(|n| n.level as i32).sum::<i32>() > 0, "service {service} seed {seed} granted nothing");
+            granted += cg.skills.iter().filter(|n| unused(n.id)).count();
+        } }
+        set_no_unused_skills(false);
+        granted
+    };
+    let off = run(false);
+    assert!(off > 0, "with the option off the same sessions do grant unused skills");
+    assert_eq!(run(true), 0, "with the option on no unused skill is granted");
+    println!("PASS disable unused skills: 200 sessions of 60 rolls, {off} unused skills off, 0 on");
+}
+
+#[test]
 fn record_16_rewrites_the_draft_message() {
     let Some(oracle) = oracle_env::oracle() else { return };
     let Some(ds) = cg_image(&oracle) else { println!("SKIP: no CG.DAT (MT1_GAMEFILES) and no oracle work/mt1/CG.exe"); return };

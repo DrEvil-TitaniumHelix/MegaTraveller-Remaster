@@ -163,12 +163,12 @@ fn skills(g: &mut Ground, who: i16) {
     let mut p = Paint::new(g, Raster::Planar);
     p.ink(10);
     while i < 80 && n < 21 {
-        let level = p.g.mem.party_u8(
+        let level = crate::record::shown_skill(i as u8, p.g.mem.party_u8(
             (who as u16)
                 .wrapping_mul(256)
                 .wrapping_add(i as u16)
                 .wrapping_add(0x12B),
-        );
+        ));
         if level != 0 {
             p.at(n * 6 + 66, 5);
             p.pointed_text(0x1479u16.wrapping_add((i as u16).wrapping_mul(4)));

@@ -5,6 +5,7 @@ use crate::ui::CgUi;
 
 pub fn add_skill<H: CgUi>(cg: &mut Cg, ui: &mut H, id: u8, amount: i8) -> i8 {
     if cg.ds.skill_type(id) == 1 { change_attribute(ui, id, amount); return amount }
+    if amount > 0 && cg.ds.unused(id) { return 0 }
     let first = cg.first_skill as i32;
     if let Some(pos) = cg.find_skill(id) {
         let n = &mut cg.skills[pos];
@@ -95,13 +96,17 @@ pub fn choose_skills<H: CgUi>(cg: &mut Cg, ui: &mut H) -> R {
         let table = cg.esc(r)?;
         last_table = table;
         ui.close_window(window); ui.close_window(cg.title_window);
-        let die = cg.dice(ui, 1) - 1;
-        let mut skill = cg.ds.u8((cg.ds.u16(0x2D48 + 2 * table as usize) as isize + 5 * die as isize + service) as usize);
-        ui.flash(147, 171, 8, 97, 4, die);
+        let row = |die: i16| cg.ds.u8((cg.ds.u16(0x2D48 + 2 * table as usize) as isize + 5 * die as isize + service) as usize);
+        let any_live = (0..6).any(|die| cg.live(row(die)));
+        let mut skill = loop {
+            let die = cg.dice(ui, 1) - 1;
+            ui.flash(147, 171, 8, 97, 4, die);
+            if !any_live || cg.live(row(die)) { break row(die) }
+        };
         if cg.ds.skill_type(skill) == 2 {
             cg.message(ui, 0x2DE0, &[cg.ds.skill_name(skill).into()]);
             ui.reset_text(); ui.set_line_height(8); ui.set_text_spacing(5); ui.set_text_color(2);
-            let members = cg.specialties.iter().find(|(id, _)| *id == skill).map(|(_, l)| l.clone()).unwrap_or_default();
+            let members = cg.specialties.iter().find(|(id, _)| *id == skill).map(|(_, l)| l.iter().copied().filter(|&m| !cg.ds.unused(m)).collect::<Vec<u8>>()).unwrap_or_default();
             let labels: Vec<String> = members.iter().map(|&m| format!("{}{}", if cg.ds.skill_type(m) == 1 { "+1 " } else { "" }, cg.ds.skill_name(m))).collect();
             let choice = cg.menu(ui, &menu_args(&strs(&labels), &[4, 103, 95, 0, 2, 0, 1, 0, 3], -1))?;
             skill = members.get(choice.max(0) as usize).copied().unwrap_or(skill);

@@ -269,6 +269,7 @@ impl App {
         }
         let fullscreen = self.look.fullscreen;
         action.apply(&mut self.look);
+        mt1::record::set_no_unused_skills(self.look.disable_unused_skills);
         if action == Action::ClassicCombat && self.intents.len() < MAX_INPUT_EVENTS { self.intents.push_back(Intent::ClassicCombat(self.look.classic_combat)); }
         if matches!(action, Action::GrenadeRange | Action::NpcSelectiveAutofire) && self.intents.len() < MAX_INPUT_EVENTS { self.intents.push_back(Intent::BalanceOptions(self.look.balance_options())); }
         self.ui.preset = self.look.layout.preset.into(); self.ui.log_lines = self.look.layout.log_lines;
@@ -528,6 +529,7 @@ fn open_speaker() -> Option<(Arc<Mutex<Speaker>>, cpal::Stream)> {
 }
 impl Win {
     pub fn classic_combat(&self) -> bool { self.app.look.classic_combat }
+    pub fn disable_unused_skills(&self) -> bool { self.app.look.disable_unused_skills }
     pub fn autosave(&self) -> bool { self.app.look.autosave != megatraveller::look::MenuSound::Off }
     pub fn balance_options(&self) -> mt1::ground::rules::balance::Options { self.app.look.balance_options() }
     pub fn new(scale: usize, square: bool, faithful: bool, mouse: bool) -> Result<Self, String> {

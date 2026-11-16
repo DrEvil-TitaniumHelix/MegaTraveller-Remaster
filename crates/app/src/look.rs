@@ -133,6 +133,7 @@ pub struct Look {
     pub fullscreen: bool,
     pub layout: crate::panels::settings::LayoutSettings,
     pub classic_combat: bool,
+    pub disable_unused_skills: bool,
     pub grenade_range: bool, pub npc_selective_autofire: bool,
     pub npc_playback_ms: u32,
     pub menu_sound: MenuSound,
@@ -143,7 +144,7 @@ impl Default for Look {
         Self { mouse: true, scale: ScaleMode::Integer, shape: Shape::Classic, filter: Filter::Nearest,
             screen: Screen::None, palette: Palette::Ega, font: FontChoice::Builtin(crate::font_menu::DEFAULT_FACE), bold: false, text_colour: TextColour::HighContrast,
             background: Background::Black, custom_tint: [255, 220, 170], custom_background: [24, 24, 32],
-            window_size: default_window_size(), window_pos: None, fullscreen: false, layout: Default::default(), classic_combat: false, grenade_range: true, npc_selective_autofire: true, npc_playback_ms: 250, menu_sound: MenuSound::On, autosave: MenuSound::On }
+            window_size: default_window_size(), window_pos: None, fullscreen: false, layout: Default::default(), classic_combat: false, disable_unused_skills: false, grenade_range: true, npc_selective_autofire: true, npc_playback_ms: 250, menu_sound: MenuSound::On, autosave: MenuSound::On }
     }
 }
 impl Look {

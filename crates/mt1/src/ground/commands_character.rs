@@ -292,12 +292,12 @@ pub fn page(g: &mut Ground, who: i16, home: bool) {
         let mut i = g.mem.i16(0x6ECE);
         let mut n = 0;
         while i < 80 && n < 21 {
-            if g.mem.party_u8(
+            if crate::record::shown_skill(i as u8, g.mem.party_u8(
                 (who as u16)
                     .wrapping_mul(256)
                     .wrapping_add(i as u16)
                     .wrapping_add(0x12B),
-            ) != 0
+            )) != 0
             {
                 n += 1
             }

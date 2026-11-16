@@ -120,7 +120,7 @@ impl Space {
         self.set_color(10);
         while skill < 80 {
             if row == 21 { break; }
-            let level = self.s.pbyte((c as u16).wrapping_mul(256).wrapping_add(skill as u16).wrapping_add(0x12B));
+            let level = crate::record::shown_skill(skill as u8, self.s.pbyte((c as u16).wrapping_mul(256).wrapping_add(skill as u16).wrapping_add(0x12B)));
             if level > 0 {
                 self.set_text_position(row * 6 + 66, 5);
                 let name = self.far_string(0x1ADBu16.wrapping_add((skill as u16).wrapping_mul(4))); self.draw_text(&name);

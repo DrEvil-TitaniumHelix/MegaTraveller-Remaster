@@ -272,7 +272,7 @@ impl StationHost<'_> {
         let (mut skill, mut count) = (self.sp.s.word(record::FIRST_SKILL), 0);
         while skill < 80 {
             if count == 21 { break; }
-            if self.pb((c << 8) + 0x12B + skill as i32) > 0 { count += 1; }
+            if crate::record::shown_skill(skill as u8, self.pb((c << 8) + 0x12B + skill as i32) as u8) > 0 { count += 1; }
             skill += 1;
         }
         if skill <= 80 {
