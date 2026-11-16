@@ -1,5 +1,16 @@
 # Release notes
 
+## Version: v0.9.2-beta
+
+Date: 2026-11-16. MegaTraveller 1 Plus, public beta.
+
+### Changes since v0.9.1-beta
+
+- New option: Plus menu > Disable unused skills (off by default). 34 of the
+  71 skills never do anything in the game; with the option on, new characters
+  never get them and the character screens hide them. Also on RecompLauncher's
+  settings screen.
+
 ## Version: v0.9.1-beta
 
 Date: 2026-11-16. MegaTraveller 1 Plus, public beta.
