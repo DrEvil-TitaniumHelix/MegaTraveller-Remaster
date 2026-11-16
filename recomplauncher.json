@@ -12,5 +12,87 @@
     "program": ["megatraveller.exe"],
     "args": ["--gamefiles", "{game}"]
   },
-  "saves": ["saves", "look.toml"]
+  "saves": ["saves", "look.toml"],
+  "config": [
+    { "id": "main", "format": "toml", "file": [{ "path": "{install}/look.toml" }] }
+  ],
+  "settings": [
+    {
+      "id": "window", "label": "Window",
+      "help": "Fullscreen fills your screen. F11 switches while you play.",
+      "choices": [
+        { "label": "Windowed", "set": { "fullscreen": "false" } },
+        { "label": "Fullscreen", "set": { "fullscreen": "true" } }
+      ],
+      "defaults": { "fullscreen": "false" }
+    },
+    {
+      "id": "shape", "label": "Picture shape",
+      "help": "4:3 is how the game looked on a 1990 monitor. Square pixels shows it wider and flatter.",
+      "choices": [
+        { "label": "1990 4:3", "set": { "shape": "\"classic\"" } },
+        { "label": "Square pixels", "set": { "shape": "\"square\"" } }
+      ],
+      "defaults": { "shape": "\"classic\"" }
+    },
+    {
+      "id": "scale", "label": "Picture size",
+      "help": "Whole steps keep every pixel the same size. Fill uses all of the window.",
+      "choices": [
+        { "label": "Whole steps", "set": { "scale": "\"integer\"" } },
+        { "label": "Fill the window", "set": { "scale": "\"fill\"" } }
+      ],
+      "defaults": { "scale": "\"integer\"" }
+    },
+    {
+      "id": "filter", "label": "Smoothing",
+      "help": "How the 1990 picture is enlarged: crisp blocks, sharp edges or a soft blend.",
+      "choices": [
+        { "label": "Raw blocks", "set": { "filter": "\"nearest\"" } },
+        { "label": "Sharp", "set": { "filter": "\"sharp\"" } },
+        { "label": "Soft", "set": { "filter": "\"soft\"" } }
+      ],
+      "defaults": { "filter": "\"nearest\"" }
+    },
+    {
+      "id": "screen", "label": "Screen effect",
+      "help": "Adds the look of an old monitor on top of the picture.",
+      "choices": [
+        { "label": "None", "set": { "screen": "\"none\"" } },
+        { "label": "Scanlines", "set": { "screen": "\"scanlines\"" } },
+        { "label": "CRT", "set": { "screen": "\"crt\"" } },
+        { "label": "Phosphor bleed", "set": { "screen": "\"phosphor\"" } }
+      ],
+      "defaults": { "screen": "\"none\"" }
+    },
+    {
+      "id": "palette", "label": "Colours",
+      "help": "The original 16 colours, or the tint of a warm, amber or green monitor.",
+      "choices": [
+        { "label": "EGA", "set": { "palette": "\"ega\"" } },
+        { "label": "Warm monitor", "set": { "palette": "\"warm\"" } },
+        { "label": "Amber mono", "set": { "palette": "\"amber\"" } },
+        { "label": "Green mono", "set": { "palette": "\"green\"" } }
+      ],
+      "defaults": { "palette": "\"ega\"" }
+    },
+    {
+      "id": "combat", "label": "Ground combat",
+      "help": "Squad turns gives each Traveller a turn. Classic 1990 is the original real-time combat.",
+      "choices": [
+        { "label": "Squad turns", "set": { "classic_combat": "false" } },
+        { "label": "Classic 1990", "set": { "classic_combat": "true" } }
+      ],
+      "defaults": { "classic_combat": "false" }
+    },
+    {
+      "id": "autosave", "label": "Autosave",
+      "help": "Saves your game by itself as you play.",
+      "choices": [
+        { "label": "On", "set": { "autosave": "\"on\"" } },
+        { "label": "Off", "set": { "autosave": "\"off\"" } }
+      ],
+      "defaults": { "autosave": "\"on\"" }
+    }
+  ]
 }

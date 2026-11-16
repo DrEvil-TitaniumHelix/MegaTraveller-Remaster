@@ -1,4 +1,4 @@
-# Keys (v0.9.0-beta)
+# Keys (v0.9.1-beta)
 
 The mouse works beside these keys (see README, "Mouse and keys"). Every 1990 function has a key here, not every 1990 key is kept. A key the 1990 game has for the function stays. A new key takes nothing from the 1990 ground table (`notes/input_map.md`, "Ground game", dispatch T:6923).
 

@@ -1,8 +1,15 @@
 # Release notes
 
-## Version: v0.9.0-beta
+## Version: v0.9.1-beta
 
-Date: 2026-11-13. MegaTraveller 1 Plus, first public beta.
+Date: 2026-11-16. MegaTraveller 1 Plus, public beta.
+
+### Changes since v0.9.0-beta
+
+- RecompLauncher shows the game's options on its settings screen: window,
+  picture shape and size, smoothing, screen effect, colours, ground combat
+  and autosave.
+- The game itself is unchanged.
 
 ### Known issues
 
